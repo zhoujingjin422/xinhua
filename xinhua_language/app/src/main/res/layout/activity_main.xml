@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/card_bottom"
+            android:layout_height="0dp"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_bottom"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="28dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="20dp"
+            app:cardElevation="3dp"
+            app:cardMaxElevation="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="56dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/iv_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/home_true"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/iv_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/listen_false"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/iv_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/res_false"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/iv_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/mine_false"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
