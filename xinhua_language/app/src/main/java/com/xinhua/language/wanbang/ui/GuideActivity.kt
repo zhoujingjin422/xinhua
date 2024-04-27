@@ -26,14 +26,13 @@ class GuideActivity: BaseVMActivity(), NextClickCallBack {
 
     override fun initData() {
         val imageList = mutableListOf<Int>()
-//       imageList.add(R.drawable.guide_1)
-//       imageList.add(R.drawable.guide_2)
-//       imageList.add(R.drawable.guide_3)
+       imageList.add(R.mipmap.guide_1)
+       imageList.add(R.mipmap.guide_2)
         adapter.setList(imageList)
     }
 
     override fun clickNext(position: Int) {
-        if (position!=2)
+        if (position!=1)
         binding.viewpager.setCurrentItem(position+1,true)
         else {
             //记录已经不是第一次进来了

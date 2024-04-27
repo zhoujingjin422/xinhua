@@ -13,6 +13,7 @@ dependencyResolutionManagement {
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
 //        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://jitpack.io' }
         jcenter()
         google()
         mavenCentral()

@@ -7,8 +7,8 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-//import com.xinhua.language.wanbang.utils.getLoadingDialog
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xinhua.language.R
 
 abstract class BaseVMActivity : AppCompatActivity() {
     lateinit var mContext: Context
@@ -36,7 +36,8 @@ abstract class BaseVMActivity : AppCompatActivity() {
        immersionBar {
            fitsSystemWindows(false)
            transparentStatusBar()
-           navigationBarColor(R.color.c_637cf8)
+           autoDarkModeEnable(true)
+           statusBarDarkFont(true)
        }
     }
 }

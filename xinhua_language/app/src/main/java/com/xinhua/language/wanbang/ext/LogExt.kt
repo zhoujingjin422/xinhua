@@ -1,7 +1,7 @@
 package com.xinhua.language.wanbang.ext
 
 import android.util.Log
-import com.xinhua.language.wanbang.BuildConfig
+import com.xinhua.language.BuildConfig
 
 /**
  * Created by luyao

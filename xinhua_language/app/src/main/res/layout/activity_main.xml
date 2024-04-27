@@ -18,48 +18,57 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/card_bottom"
             android:layout_height="0dp"/>
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:id="@+id/card_bottom"
             android:layout_width="match_parent"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:cardCornerRadius="28dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginStart="20dp"
-            app:cardElevation="3dp"
-            app:cardMaxElevation="5dp"
-            android:layout_marginEnd="20dp"
-            android:layout_height="56dp">
+            app:cardElevation="0dp"
+            android:layout_height="57dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+                <TextView
                     android:id="@+id/iv_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/home_true"
-                    android:layout_weight="1"/>
-                <ImageView
+                    android:text="新华字典"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="10sp"
+                    app:drawableTopCompat="@mipmap/icon_home_selected" />
+                <TextView
                     android:id="@+id/iv_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/listen_false"
-                    android:layout_weight="1"/>
-                <ImageView
+                    android:layout_weight="1"
+                    android:text="写字板"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:textColor="#666666"
+                    app:drawableTopCompat="@mipmap/icon_write" />
+                <TextView
                     android:id="@+id/iv_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/res_false"
-                    android:layout_weight="1"/>
-                <ImageView
-                    android:id="@+id/iv_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/mine_false"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="我的"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:textColor="#666666"
+                    app:drawableTopCompat="@mipmap/icon_setting" />
+                />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

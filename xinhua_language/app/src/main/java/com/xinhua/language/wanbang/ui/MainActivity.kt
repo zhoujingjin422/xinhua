@@ -18,9 +18,11 @@ class MainActivity : BaseVMActivity() {
 
     private val fragmentList = mutableMapOf<Int, Fragment>()
     private val binding by binding<ActivityMainBinding>(R.layout.activity_main)
+    private lateinit var viewModel:MainViewModel
 
     @SuppressLint("SuspiciousIndentation")
     override fun initView() {
+        viewModel = MainViewModel()
         binding.apply {
             iv1.setOnClickListener {
                 changeViewState(1)
@@ -31,10 +33,6 @@ class MainActivity : BaseVMActivity() {
             iv3.setOnClickListener {
                 changeViewState(3)
             }
-            iv4.setOnClickListener {
-                changeViewState(4)
-            }
-
         }
 //        inPurchaseUtils = InPurchaseUtils(this)
 //        inPurchaseUtils.conListener = object :InPurchaseUtils.ConnectListener{
@@ -45,74 +43,83 @@ class MainActivity : BaseVMActivity() {
     }
 
     private fun changeViewState(i: Int) {
-//        when (i) {
-//            1 -> {
-//                binding.iv1.setImageResource(R.drawable.home_true)
-//                binding.iv2.setImageResource(R.drawable.listen_false)
-//                binding.iv3.setImageResource(R.drawable.res_false)
-//                binding.iv4.setImageResource(R.drawable.mine_false)
-//            }
-//
-//            2 -> {
-//                binding.iv1.setImageResource(R.drawable.home_false)
-//                binding.iv2.setImageResource(R.drawable.listen_true)
-//                binding.iv3.setImageResource(R.drawable.res_false)
-//                binding.iv4.setImageResource(R.drawable.mine_false)
-//            }
-//
-//            3 -> {
-//                binding.iv1.setImageResource(R.drawable.home_false)
-//                binding.iv2.setImageResource(R.drawable.listen_false)
-//                binding.iv3.setImageResource(R.drawable.res_true)
-//                binding.iv4.setImageResource(R.drawable.mine_false)
-//            }
-//
-//            4 -> {
-//                binding.iv1.setImageResource(R.drawable.home_false)
-//                binding.iv2.setImageResource(R.drawable.listen_false)
-//                binding.iv3.setImageResource(R.drawable.res_false)
-//                binding.iv4.setImageResource(R.drawable.mine_true)
-//            }
-//        }
+        when (i) {
+            1 -> {
+                binding.iv1.setTextColor(resources.getColor(R.color.black))
+                binding.iv1.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_home_selected),null,null)
+                binding.iv2.setTextColor(resources.getColor(R.color.c_666666))
+                binding.iv2.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_write),null,null)
+                binding.iv2.setTextColor(resources.getColor(R.color.c_666666))
+                binding.iv3.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_setting),null,null)
+            }
+
+            2 -> {
+                binding.iv1.setTextColor(resources.getColor(R.color.c_666666))
+                binding.iv1.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_home),null,null)
+                binding.iv2.setTextColor(resources.getColor(R.color.black))
+                binding.iv2.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_write_selected),null,null)
+                binding.iv3.setTextColor(resources.getColor(R.color.c_666666))
+                binding.iv3.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_setting),null,null)
+
+            }
+
+            3 -> {
+                binding.iv1.setTextColor(resources.getColor(R.color.c_b2b2b2))
+                binding.iv1.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_home),null,null)
+                binding.iv2.setTextColor(resources.getColor(R.color.c_b2b2b2))
+                binding.iv2.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_write),null,null)
+                binding.iv3.setTextColor(resources.getColor(R.color.black))
+                binding.iv3.setCompoundDrawablesWithIntrinsicBounds(null,resources.getDrawable(R.mipmap.icon_setting_selected),null,null)
+            }
+
+        }
         changeFragment(i)
     }
 
     private fun changeFragment(i: Int) {
-//        val trans = supportFragmentManager.beginTransaction()
-//        var fragment = fragmentList[i]
-//        fragmentList.forEach {
-//            trans.hide(it.value)
-//        }
-//        if (fragment == null) {
-////            fragment = when (i) {
-////                1 -> {
-////                    WebFragment.getInstance()
-////                }
-////
-////                2 -> {
-////                    ListenFragment.getInstance()
-////                }
-////
-////                3 -> {
-////                    ResourceFragment.getInstance()
-////                }
-////
-////                else -> {
-////                    MineFragment.getInstance()
-////                }
-//            }
-//            trans.add(R.id.container, fragment).commitAllowingStateLoss()
-//            fragmentList[i] = fragment
-//        } else {
-//            trans.show(fragment).commitAllowingStateLoss()
-//        }
+        val trans = supportFragmentManager.beginTransaction()
+        var fragment = fragmentList[i]
+        fragmentList.forEach {
+            trans.hide(it.value)
+        }
+        if (fragment == null) {
+            fragment = when (i) {
+                1 -> {
+                    HomeFragment.getInstance()
+                }
+
+                2 -> {
+                    WriteFragment.getInstance()
+                }
+
+                else -> {
+                    SettingFragment.getInstance()
+                }
+            }
+            trans.add(R.id.container, fragment).commitAllowingStateLoss()
+            fragmentList[i] = fragment
+        } else {
+            trans.show(fragment).commitAllowingStateLoss()
+        }
     }
+    private lateinit var networkChangeReceiver: NetworkChangeReceiver
 
     override fun initData() {
         if (!getSpValue("hasShowPrivacy", false)) {
-//            ServeAndPrivatePop(this).showPopupWindow()
+            ServeAndPrivatePop(this).showPopupWindow()
         }
         changeFragment(1)
         ActionHelper.doAction("open")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkChangeReceiver = NetworkChangeReceiver(this)
+        networkChangeReceiver.register()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        networkChangeReceiver.unregister()
     }
 }

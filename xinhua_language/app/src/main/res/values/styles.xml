@@ -11,7 +11,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:background">@drawable/start_page</item>
+        <item name="android:background">@mipmap/start_page</item>
     </style>
     <style name="guide_theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
@@ -47,17 +47,7 @@
         <item name="android:minHeight">5dp</item>
         <item name="android:thumb">@drawable/circle_blue</item>
     </style>
-
          <style name="checkbox1" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
              <item name="android:button">@drawable/checkbox_1</item>
-         </style>
-         <style name="checkbox2" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
-             <item name="android:button">@drawable/checkbox_2</item>
-         </style>
-         <style name="checkbox3" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
-             <item name="android:button">@drawable/checkbox_3</item>
-         </style>
-         <style name="checkbox4" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
-             <item name="android:button">@drawable/checkbox_4</item>
          </style>
 </resources>

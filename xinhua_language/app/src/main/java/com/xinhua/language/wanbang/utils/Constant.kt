@@ -5,7 +5,7 @@ date:2022/11/27
  */
 class Constant {
     companion object {
-        const val EVENTDOMAIN = "http://haosi.ayhhhrk.cn/"//http://haosi.ayhhhrk.cn/api/english-landing
+        const val EVENTDOMAIN = "http://haosi.ayhhhrk.cn/"
         const val APP_PARAMETER = "Hsnewcon"
         const val MIX_PARAMETER = "rfde32=tre2&hyusda=yujhg59&pogbv2h=tyef32"
         const val URL_PRIVACY_POLICY = "https://xv8u0uzszaa.feishu.cn/docx/KtB6dgEtNojleDxAPRVc7u5hnwd?from=from_copylink"
