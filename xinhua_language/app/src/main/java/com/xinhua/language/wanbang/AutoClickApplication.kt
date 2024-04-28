@@ -8,7 +8,10 @@ import com.lzy.okgo.cookie.store.DBCookieStore
 import com.lzy.okgo.model.HttpHeaders
 import com.lzy.okgo.model.HttpParams
 import com.xinhua.language.wanbang.utils.AppOpenManager
+import com.xinhua.language.wanbang.utils.appModule
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import java.util.Queue
 
 /**
@@ -26,6 +29,10 @@ class AutoClickApplication:Application() {
 //            loadInterstitialAd(this)
 //            appOpenManager?.fetchAd()
 //        }
+        startKoin {
+            androidContext(this@AutoClickApplication)
+            modules(appModule)
+        }
         appOpenManager = AppOpenManager(this)
     }
     /*** 初始化OkGo */

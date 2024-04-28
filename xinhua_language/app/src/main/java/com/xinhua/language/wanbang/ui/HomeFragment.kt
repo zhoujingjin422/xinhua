@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentHomeBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment:Fragment() {
     companion object {
@@ -19,7 +20,8 @@ class HomeFragment:Fragment() {
         }
     }
 private var  binding:FragmentHomeBinding? = null
-    private lateinit var viewModel: MainViewModel
+    private val viewModel by sharedViewModel<MainViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +34,6 @@ private var  binding:FragmentHomeBinding? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         binding?.apply {
             flSearch.setOnClickListener {
                 if (viewModel.isLogin.value==true){

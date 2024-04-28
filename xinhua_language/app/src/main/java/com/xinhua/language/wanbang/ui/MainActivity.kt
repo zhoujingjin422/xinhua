@@ -1,12 +1,23 @@
 package com.xinhua.language.wanbang.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.xinhua.language.wanbang.BaseVMActivity
 import com.xinhua.language.wanbang.ext.getSpValue
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityMainBinding
+import com.xinhua.language.wanbang.bean.FindUserBean
+import com.xinhua.language.wanbang.bean.LoginBean
+import com.xinhua.language.wanbang.bean.UserBean
+import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.ActionHelper
+import com.xinhua.language.wanbang.utils.JsonCallback
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseVMActivity() {
     companion object {
@@ -18,11 +29,10 @@ class MainActivity : BaseVMActivity() {
 
     private val fragmentList = mutableMapOf<Int, Fragment>()
     private val binding by binding<ActivityMainBinding>(R.layout.activity_main)
-    private lateinit var viewModel:MainViewModel
+    private  val viewModel by viewModel<MainViewModel>()
 
     @SuppressLint("SuspiciousIndentation")
     override fun initView() {
-        viewModel = MainViewModel()
         binding.apply {
             iv1.setOnClickListener {
                 changeViewState(1)
@@ -108,10 +118,29 @@ class MainActivity : BaseVMActivity() {
         if (!getSpValue("hasShowPrivacy", false)) {
             ServeAndPrivatePop(this).showPopupWindow()
         }
+        if (getSpValue("userPhone","").isNotEmpty()){
+            findUser()
+        }
         changeFragment(1)
         ActionHelper.doAction("open")
     }
 
+    private fun findUser(){
+        val map = mutableMapOf<String,String>()
+        map["phone"] = getSpValue("userPhone","")
+        OkGo.post<FindUserBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/findUser") // 请求方式和请求url
+            .upJson(Gson().toJson(map))
+            .execute(object : JsonCallback<FindUserBean>(FindUserBean::class.java) {
+                override fun onSuccess(response: Response<FindUserBean>) {
+                    if (response.body().code==200){
+                        viewModel.isLogin.value = true
+                        //获取成功
+                        viewModel.user.value = response.body().data
+                    }
+                }
+            })
+
+    }
     override fun onResume() {
         super.onResume()
         networkChangeReceiver = NetworkChangeReceiver(this)
