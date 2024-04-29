@@ -13,10 +13,14 @@ import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityMainBinding
 import com.xinhua.language.wanbang.bean.FindUserBean
 import com.xinhua.language.wanbang.bean.LoginBean
+import com.xinhua.language.wanbang.bean.MessageEvent
 import com.xinhua.language.wanbang.bean.UserBean
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.ActionHelper
 import com.xinhua.language.wanbang.utils.JsonCallback
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseVMActivity() {
@@ -141,6 +145,15 @@ class MainActivity : BaseVMActivity() {
             })
 
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent?) {
+        event?.let {
+           if (it.code=="UPDATE_USER"){
+               findUser()
+           }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         networkChangeReceiver = NetworkChangeReceiver(this)
@@ -150,5 +163,14 @@ class MainActivity : BaseVMActivity() {
     override fun onPause() {
         super.onPause()
         networkChangeReceiver.unregister()
+    }
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this);
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this);
     }
 }

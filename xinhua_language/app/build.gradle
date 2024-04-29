@@ -7,8 +7,9 @@ plugins {
 android {
     compileSdkVersion 33
     defaultConfig {
-        applicationId "com.xinhua.language.wanbang"
-        minSdk 21
+//        com.cp.dtlp.xinhua.android
+        applicationId "com.oxford.tenapp"
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0.0"
@@ -73,5 +74,6 @@ dependencies {
     // 支付宝支付 SDK
     api 'com.alipay.sdk:alipaysdk-android:15.8.17'
     implementation 'com.github.getActivity:ShapeView:9.0'
+    implementation("org.greenrobot:eventbus:3.3.1")
 //    api 'com.alipay.sdk:alipaysdk-android:+@aar'
 }

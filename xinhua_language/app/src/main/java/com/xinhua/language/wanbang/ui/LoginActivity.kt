@@ -104,6 +104,7 @@ class LoginActivity:BaseVMActivity() {
     private fun getCode(){
         val map = mutableMapOf<String,String>()
         map["phone"] = binding.etPhone.text.toString()
+        map["type"] = "xinhua_dict&prod"
         OkGo.post<String>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/sendVerifyCode") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : StringCallback() {
