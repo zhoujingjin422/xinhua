@@ -14,6 +14,8 @@ class PaymentUtil(private val activity: Activity) {
     // 微信支付
     //appId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: String, packageValue: String, sign: String)
     fun payWithWeChat(wechatConent: WechatConent) {
+        val api = WXAPIFactory.createWXAPI(activity, "wx21555d7b0beb1c03")
+        api.registerApp("wx21555d7b0beb1c03")
         val req = PayReq()
         req.appId = wechatConent.appid
         req.partnerId = wechatConent.partnerid
@@ -22,7 +24,6 @@ class PaymentUtil(private val activity: Activity) {
         req.timeStamp = wechatConent.timestamp
         req.packageValue = wechatConent.`package`
         req.sign = wechatConent.sign
-        val api = WXAPIFactory.createWXAPI(activity, null)
         api.sendReq(req)
     }
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xinhua.language.wanbang.BaseVMActivity
 import com.xinhua.language.wanbang.ext.getSpValue
 import com.xinhua.language.R

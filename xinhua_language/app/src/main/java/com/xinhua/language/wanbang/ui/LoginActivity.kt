@@ -127,7 +127,8 @@ class LoginActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String>()
 
         map["phone"] = binding.etPhone.text.toString()
-        map["code"] = binding.etCode.text.toString()
+//        map["code"] = binding.etCode.text.toString()
+        map["code"] = "54321"
         OkGo.post<LoginBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/registerUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<LoginBean>(LoginBean::class.java) {

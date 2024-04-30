@@ -28,15 +28,15 @@
         <activity android:name=".wanbang.ui.GuideActivity" />
         <activity android:name=".wanbang.ui.MainActivity"  />
         <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:label="@string/app_name"
+            android:name="com.oxford.tenapp.wxapi.WXPayEntryActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
-            android:taskAffinity="com.xinhua.language"
+            android:label="@string/app_name"
+            android:taskAffinity="com.oxford.tenapp"
             android:launchMode="singleTask">
         </activity>
         <activity android:name=".wanbang.ui.LoginActivity"/>
-        <activity android:name=".wanbang.ui.WebPlayPianoActivity"/>
+        <activity android:name=".wanbang.ui.WebPlayPianoActivity" />
         <activity android:name=".wanbang.ui.WebPlayActivity"/>
         <activity android:name=".wanbang.ui.SubActivity"/>
         <receiver android:name=".wanbang.ui.NetworkChangeReceiver"

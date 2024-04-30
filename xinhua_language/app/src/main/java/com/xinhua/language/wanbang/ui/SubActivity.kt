@@ -67,7 +67,7 @@ class SubActivity:BaseVMActivity() {
     }
     private fun getWechatPay(){
         val map = mutableMapOf<String,String>()
-        map["total_amount"] = "9"
+        map["total_amount"] = "0.01"
         OkGo.post<WechatPayBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/wxpay/orderStr") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<WechatPayBean>(WechatPayBean::class.java) {
@@ -123,7 +123,7 @@ class SubActivity:BaseVMActivity() {
         val date = dateFormat.parse(time)
         date.time+=365*24*60*60*1000L
         val map = mutableMapOf<String,String?>()
-        map["original_transaction_id"] = transactionId
+//        map["original_transaction_id"] = transactionId
         map["phone"] = getSpValue("userPhone","")
         map["expiredTime"] =dateTimeFormatter1.format(date)
         OkGo.post<DataBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/updateUserExpiredTime") // 请求方式和请求url
