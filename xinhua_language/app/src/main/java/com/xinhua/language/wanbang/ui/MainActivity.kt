@@ -16,6 +16,7 @@ import com.xinhua.language.wanbang.bean.FindUserBean
 import com.xinhua.language.wanbang.bean.LoginBean
 import com.xinhua.language.wanbang.bean.MessageEvent
 import com.xinhua.language.wanbang.bean.UserBean
+import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.ActionHelper
 import com.xinhua.language.wanbang.utils.JsonCallback
@@ -139,6 +140,11 @@ class MainActivity : BaseVMActivity() {
                 override fun onSuccess(response: Response<FindUserBean>) {
                     if (response.body().code==200){
                         viewModel.isLogin.value = true
+                        if (!response.body().data.expiredTime.isNullOrEmpty()){
+                            if(dateTimeFormatter1.parse(response.body().data.expiredTime).time>System.currentTimeMillis()){
+                                viewModel.isVip.postValue(true)
+                            }
+                        }
                         //获取成功
                         viewModel.user.value = response.body().data
                     }
@@ -167,11 +173,16 @@ class MainActivity : BaseVMActivity() {
     }
     override fun onStart() {
         super.onStart()
+        if (!EventBus.getDefault().isRegistered(this))
         EventBus.getDefault().register(this);
     }
 
     override fun onStop() {
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         EventBus.getDefault().unregister(this);
     }
 }

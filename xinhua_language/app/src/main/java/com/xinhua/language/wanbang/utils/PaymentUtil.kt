@@ -4,9 +4,14 @@ import android.app.Activity
 import android.os.AsyncTask
 import android.widget.Toast
 import com.alipay.sdk.app.PayTask
+import com.google.gson.Gson
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xinhua.language.wanbang.bean.WechatConent
+import com.xinhua.language.wanbang.bean.WechatPayResult
+import com.xinhua.language.wanbang.ui.SubActivity
 import org.json.JSONObject
 
 class PaymentUtil(private val activity: Activity) {
@@ -44,11 +49,19 @@ class PaymentUtil(private val activity: Activity) {
             super.onPostExecute(result)
             val resultStatus = result["resultStatus"]
             if (resultStatus == "9000") {
+                val resultStr = result["result"]
+                val json = JSONObject(resultStr)
+                if (json.has("alipay_trade_app_pay_response")){
+                   val response = json.getJSONObject("alipay_trade_app_pay_response")
+                    if (response.has("out_trade_no")){
+                        val outTradeNo=  response.getString("out_trade_no")
+                        activity as SubActivity
+                        activity.checkAliPay(outTradeNo)
+                    }
+                }
                 Toast.makeText(activity, "支付成功", Toast.LENGTH_SHORT).show()
-                // 支付成功后的操作
             } else {
                 Toast.makeText(activity, "支付失败", Toast.LENGTH_SHORT).show()
-                // 支付失败后的操作
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.xinhua.language.wanbang.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
@@ -51,7 +52,11 @@ class LoginActivity:BaseVMActivity() {
                     }
                 }
                 tvLogin.setOnClickListener {
+                    if (cb.isChecked)
                     login()
+                    else{
+                        Toast.makeText(this@LoginActivity,"请阅读并同意《用户服务协议》和《用户隐私协议》",Toast.LENGTH_SHORT).show()
+                    }
                 }
                 tvGetCode.setOnClickListener {
                     MyCountDownTimer(60000L,1000L,{time->
@@ -65,7 +70,7 @@ class LoginActivity:BaseVMActivity() {
                 }
                 val spannableString = SpannableString(str1 + str2 + str3 + str4)
                 spannableString.setSpan(
-                    resources.getColor(R.color.c_0e69c7),
+                    Color.parseColor("#0E69C7"),
                     str1.length,
                     str1.length + str2.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -76,7 +81,7 @@ class LoginActivity:BaseVMActivity() {
                     }
                 }, str1.length, str1.length + str2.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 spannableString.setSpan(
-                    resources.getColor(R.color.c_0e69c7),
+                    Color.parseColor("#0E69C7"),
                     str1.length + str2.length + str3.length,
                     str1.length + str2.length + str3.length + str4.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -127,8 +132,7 @@ class LoginActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String>()
 
         map["phone"] = binding.etPhone.text.toString()
-//        map["code"] = binding.etCode.text.toString()
-        map["code"] = "54321"
+        map["code"] = binding.etCode.text.toString()
         OkGo.post<LoginBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/registerUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<LoginBean>(LoginBean::class.java) {
@@ -138,9 +142,9 @@ class LoginActivity:BaseVMActivity() {
                         putSpValue("userPhone",response.body().data.user.phone)
                         putSpValue("token",response.body().data.token)
                         Toast.makeText(this@LoginActivity,"登录成功",Toast.LENGTH_SHORT).show()
-                      val intent =  Intent()
-                        intent.putExtra("user",Gson().toJson(response.body().data.user))
-                        setResult(10002,intent)
+                        val intent = Intent()
+                        intent.putExtra("user", Gson().toJson(response.body().data.user))
+                        setResult(10002, intent)
                        finish()
                     }else{
                         Toast.makeText(this@LoginActivity,response.message(),Toast.LENGTH_SHORT).show()

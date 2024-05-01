@@ -143,8 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 app:shape_radius="3dp"
                 app:shape_solidGradientStartColor="#F63E18"
                 app:shape_solidGradientEndColor="#F53C2B">
@@ -166,7 +166,7 @@
                     android:textColor="#F9A097"
                     android:textStyle="bold"
                     android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="28dp"/>
+                    android:layout_marginEnd="20dp"/>
             </com.hjq.shape.layout.ShapeFrameLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

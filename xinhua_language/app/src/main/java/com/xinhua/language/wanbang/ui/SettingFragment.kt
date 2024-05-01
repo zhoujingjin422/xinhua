@@ -16,6 +16,7 @@ import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentSettingBinding
 import com.xinhua.language.databinding.FragmentWriteBinding
 import com.xinhua.language.wanbang.bean.UserBean
+import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -117,6 +118,11 @@ class SettingFragment:Fragment() {
                 val user = Gson().fromJson(it,UserBean::class.java)
                 viewModel.isLogin.postValue(true)
                 viewModel.user.postValue(user)
+                if (!user.expiredTime.isNullOrEmpty()){
+                    if(dateTimeFormatter1.parse(user.expiredTime).time>System.currentTimeMillis()){
+                        viewModel.isVip.postValue(true)
+                    }
+                }
             }
         }
     }
