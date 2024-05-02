@@ -81,12 +81,14 @@ class SettingFragment:Fragment() {
         viewModel.isVip.observe(viewLifecycleOwner, Observer {
             if (it){
                 binding?.ivVip?.setImageResource(R.mipmap.icon_vip)
+                binding?.flQu?.visibility = View.GONE
             }else{
                 binding?.ivVip?.setImageResource(R.mipmap.icon_not_vip)
+                binding?.flQu?.visibility = View.VISIBLE
             }
         })
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            binding?.tvPhone?.text = it?.phone
+            binding?.tvPhone?.text = it?.phone?.substring(0,3)+"****"+it?.phone?.substring(it!!.phone!!.length-3,it!!.phone!!.length)
         })
         initData()
     }
@@ -106,7 +108,7 @@ class SettingFragment:Fragment() {
             binding?.ivVip?.setImageResource(R.mipmap.icon_not_vip)
         }
         if (viewModel.user.value!=null){
-            binding?.tvPhone?.text = viewModel.user.value?.phone
+            binding?.tvPhone?.text = viewModel.user.value?.phone?.substring(0,3)+"****"+viewModel.user.value?.phone?.substring(viewModel.user.value!!.phone!!.length-3,viewModel.user.value!!.phone!!.length)
         }
     }
 

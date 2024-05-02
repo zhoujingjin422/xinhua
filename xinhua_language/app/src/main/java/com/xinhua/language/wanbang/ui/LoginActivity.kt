@@ -1,12 +1,6 @@
 package com.xinhua.language.wanbang.ui
 
 import android.content.Intent
-import android.graphics.Color
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.google.gson.Gson
@@ -17,8 +11,6 @@ import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityLoginBinding
 import com.xinhua.language.wanbang.BaseVMActivity
 import com.xinhua.language.wanbang.bean.LoginBean
-import com.xinhua.language.wanbang.bean.UserBean
-import com.xinhua.language.wanbang.ext.getCurrentTime
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.JsonCallback
@@ -26,11 +18,6 @@ import com.xinhua.language.wanbang.utils.MyCountDownTimer
 
 class LoginActivity:BaseVMActivity() {
     private val binding by binding<ActivityLoginBinding>(R.layout.activity_login)
-    private var str1 =
-        "我已阅读并同意"
-    private var str2 = "《服务协议》"
-    private var str3 = "和"
-    private var str4 = "《用户隐私协议》"
       override fun initView() {
         binding.apply {
             ivClose.setOnClickListener {
@@ -44,6 +31,7 @@ class LoginActivity:BaseVMActivity() {
                     tvGetCode.isClickable = false
                     tvGetCode.setTextColor(resources.getColor(R.color.c_b0b0b0))
                 }
+            }
                 cb.setOnCheckedChangeListener { _, b ->
                     if (b){
                         tvLogin.setTextColor((resources.getColor(R.color.white)))
@@ -68,39 +56,21 @@ class LoginActivity:BaseVMActivity() {
                     tvGetCode.isClickable = false
                     getCode()
                 }
-                val spannableString = SpannableString(str1 + str2 + str3 + str4)
-                spannableString.setSpan(
-                    Color.parseColor("#0E69C7"),
-                    str1.length,
-                    str1.length + str2.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                spannableString.setSpan(object : ClickableSpan() {
-                    override fun onClick(p0: View) {
-                        WebPlayActivity.startActivity(this@LoginActivity,"服务协议",Constant.URL_TERMS_OF_USE)
-                    }
-                }, str1.length, str1.length + str2.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                spannableString.setSpan(
-                    Color.parseColor("#0E69C7"),
-                    str1.length + str2.length + str3.length,
-                    str1.length + str2.length + str3.length + str4.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                spannableString.setSpan(
-                    object : ClickableSpan() {
-                        override fun onClick(p0: View) {
-                            WebPlayActivity.startActivity(this@LoginActivity,"用户隐私协议",Constant.URL_PRIVACY_POLICY)
-                        }
-                    },
-                    str1.length + str2.length + str3.length,
-                    str1.length + str2.length + str3.length + str4.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                tvCb.movementMethod = LinkMovementMethod.getInstance()
-                tvCb.text = spannableString
+                tvFwxy.setOnClickListener {
+                    WebPlayActivity.startActivity(
+                        this@LoginActivity,
+                        "服务协议",
+                        Constant.URL_TERMS_OF_USE
+                    )
+                }
+                tvYsxy.setOnClickListener {
+                    WebPlayActivity.startActivity(
+                        this@LoginActivity,
+                        "用户隐私协议",
+                        Constant.URL_PRIVACY_POLICY
+                    )
+                }
             }
-        }
-
     }
 
     /**

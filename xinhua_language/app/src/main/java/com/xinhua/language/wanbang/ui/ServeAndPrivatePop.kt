@@ -6,8 +6,11 @@ import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.SpannedString
+import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -46,32 +49,54 @@ class ServeAndPrivatePop(context: Context) : BasePopupWindow(context) {
                 exitProcess(0)
             }
             val spannableString = SpannableString(str1 + str2 + str3 + str4 + str5)
-            spannableString.setSpan(
-                context.resources.getColor(R.color.c_0e69c7),
-                str1.length,
-                str1.length + str2.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+
             spannableString.setSpan(object : ClickableSpan() {
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.color = Color.parseColor("#FF1D6AEB")
+                    ds.isUnderlineText = false
+                }
                 override fun onClick(p0: View) {
                     WebPlayActivity.startActivity(context,"服务协议", Constant.URL_TERMS_OF_USE)
                 }
             }, str1.length, str1.length + str2.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(
-                context.resources.getColor(R.color.c_0e69c7),
-                str1.length + str2.length + str3.length,
-                str1.length + str2.length + str3.length + str4.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+
+
             spannableString.setSpan(
                 object : ClickableSpan() {
                     override fun onClick(p0: View) {
                         WebPlayActivity.startActivity(context,"用户隐私协议",Constant.URL_PRIVACY_POLICY)
                     }
+
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.color = Color.parseColor("#FF1D6AEB")
+                        ds.isUnderlineText = false
+                    }
                 },
                 str1.length + str2.length + str3.length,
                 str1.length + str2.length + str3.length + str4.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannableString.setSpan(
+                object : UnderlineSpan() {
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.color = Color.parseColor("#FF1D6AEB")
+                        ds.isUnderlineText = false
+                    }
+                },
+                str1.length,
+                str1.length + str2.length,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            spannableString.setSpan(
+                object : UnderlineSpan() {
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.color = Color.parseColor("#FF1D6AEB")
+                        ds.isUnderlineText = false
+                    }
+                },
+                str1.length + str2.length + str3.length,
+                str1.length + str2.length + str3.length + str4.length,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE
             )
             tvContent.movementMethod = LinkMovementMethod.getInstance()
             tvContent.text = spannableString

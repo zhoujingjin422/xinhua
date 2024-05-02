@@ -3,6 +3,7 @@ package com.xinhua.language.wanbang.ui
 import android.content.Context
 import android.view.Gravity
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.xinhua.language.R
 import com.xinhua.language.databinding.PopKefuBinding
 import com.xinhua.language.databinding.PopNetErrorBinding
@@ -18,6 +19,7 @@ class KefuPop(context: Context) : BasePopupWindow(context) {
         val bind = DataBindingUtil.bind<PopKefuBinding>(contentView)
         bind?.apply {
            ivClose.setOnClickListener { dismiss() }
+            Glide.with(context).asBitmap().load("").into(ivErw)
         }
         setOutSideDismiss(true)
         popupGravity = Gravity.CENTER
