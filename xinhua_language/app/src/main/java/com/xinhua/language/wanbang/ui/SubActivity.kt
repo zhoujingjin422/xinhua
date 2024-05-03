@@ -18,6 +18,7 @@ import com.xinhua.language.wanbang.bean.WechatPayBean
 import com.xinhua.language.wanbang.bean.WechatPayResult
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import com.xinhua.language.wanbang.ext.getSpValue
+import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.JsonCallback
 import com.xinhua.language.wanbang.utils.PaymentUtil
 import org.greenrobot.eventbus.EventBus
@@ -51,7 +52,20 @@ class SubActivity:BaseVMActivity() {
             val paint = Paint()
             paint.isStrikeThruText = true // 设置中划线
             tvOldPrice.paintFlags = tvOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG // 应用中划线到TextView
-
+            tvServer.setOnClickListener {
+                WebPlayActivity.startActivity(
+                    this@SubActivity,
+                    "服务条款",
+                    Constant.URL_TERMS_OF_USE
+                )
+            }
+            tvPrivate.setOnClickListener {
+                WebPlayActivity.startActivity(
+                    this@SubActivity,
+                    "隐私协议",
+                    Constant.URL_PRIVACY_POLICY
+                )
+            }
             flBuy.setOnClickListener {
                 //开买，调用支付方法
                 buyNow()

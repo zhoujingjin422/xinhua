@@ -81,10 +81,8 @@ class SettingFragment:Fragment() {
         viewModel.isVip.observe(viewLifecycleOwner, Observer {
             if (it){
                 binding?.ivVip?.setImageResource(R.mipmap.icon_vip)
-                binding?.flQu?.visibility = View.GONE
             }else{
                 binding?.ivVip?.setImageResource(R.mipmap.icon_not_vip)
-                binding?.flQu?.visibility = View.VISIBLE
             }
         })
         viewModel.user.observe(viewLifecycleOwner, Observer {
