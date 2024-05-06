@@ -17,6 +17,7 @@ import com.xinhua.language.databinding.FragmentSettingBinding
 import com.xinhua.language.databinding.FragmentWriteBinding
 import com.xinhua.language.wanbang.bean.UserBean
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
+import com.xinhua.language.wanbang.ext.dateTimeFormatter2
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -55,7 +56,7 @@ class SettingFragment:Fragment() {
             flYs.setOnClickListener {
                 WebPlayActivity.startActivity(requireActivity(),"隐私协议",Constant.URL_PRIVACY_POLICY)
             }
-            ivVip.setOnClickListener {
+            ivNotVip.setOnClickListener {
                 if (viewModel.isVip.value == false){
                     startActivity(Intent(requireActivity(),SubActivity::class.java))
                 }
@@ -71,18 +72,23 @@ class SettingFragment:Fragment() {
             if (it){
                 binding?.llNotLogin?.visibility =View.GONE
                 binding?.clLogin?.visibility = View.VISIBLE
-                binding?.ivVip?.visibility = View.VISIBLE
+                binding?.flVip?.visibility = View.VISIBLE
             }else{
                 binding?.llNotLogin?.visibility =View.VISIBLE
                 binding?.clLogin?.visibility = View.GONE
-                binding?.ivVip?.visibility = View.GONE
+                binding?.flVip?.visibility = View.GONE
             }
         })
         viewModel.isVip.observe(viewLifecycleOwner, Observer {
             if (it){
-                binding?.ivVip?.setImageResource(R.mipmap.icon_vip)
+                binding?.ivNotVip?.visibility = View.GONE
+                binding?.rlVipNow?.visibility = View.VISIBLE
+                val result = viewModel.user.value?.expiredTime?.replace("-",".")
+                val date = result?.subSequence(0,10)
+                binding?.tvEndDate?.text = "有效期至：${date}"
             }else{
-                binding?.ivVip?.setImageResource(R.mipmap.icon_not_vip)
+                binding?.ivNotVip?.visibility = View.VISIBLE
+                binding?.rlVipNow?.visibility = View.GONE
             }
         })
         viewModel.user.observe(viewLifecycleOwner, Observer {
@@ -94,16 +100,22 @@ class SettingFragment:Fragment() {
         if (viewModel.isLogin.value==true){
             binding?.llNotLogin?.visibility =View.GONE
             binding?.clLogin?.visibility = View.VISIBLE
-            binding?.ivVip?.visibility = View.VISIBLE
+            binding?.flVip?.visibility = View.VISIBLE
         }else{
             binding?.llNotLogin?.visibility =View.VISIBLE
             binding?.clLogin?.visibility = View.GONE
-            binding?.ivVip?.visibility = View.GONE
+            binding?.flVip?.visibility = View.GONE
         }
         if (viewModel.isVip.value==true){
-            binding?.ivVip?.setImageResource(R.mipmap.icon_vip)
+            binding?.rlVipNow?.visibility = View.VISIBLE
+            binding?.ivNotVip?.visibility = View.GONE
+            val result = viewModel.user.value?.expiredTime?.replace("-",".")
+            val date = result?.subSequence(0,10)
+            binding?.tvEndDate?.text = "有效期至：${date}"
         }else{
-            binding?.ivVip?.setImageResource(R.mipmap.icon_not_vip)
+            binding?.rlVipNow?.visibility = View.GONE
+            binding?.flVip?.visibility = View.GONE
+            binding?.ivNotVip?.visibility = View.VISIBLE
         }
         if (viewModel.user.value!=null){
             binding?.tvPhone?.text = viewModel.user.value?.phone?.substring(0,3)+"****"+viewModel.user.value?.phone?.substring(viewModel.user.value!!.phone!!.length-3,viewModel.user.value!!.phone!!.length)
@@ -121,7 +133,11 @@ class SettingFragment:Fragment() {
                 if (!user.expiredTime.isNullOrEmpty()){
                     if(dateTimeFormatter1.parse(user.expiredTime).time>System.currentTimeMillis()){
                         viewModel.isVip.postValue(true)
+                    }else{
+                        viewModel.isVip.postValue(false)
                     }
+                }else{
+                    viewModel.isVip.postValue(false)
                 }
             }
         }

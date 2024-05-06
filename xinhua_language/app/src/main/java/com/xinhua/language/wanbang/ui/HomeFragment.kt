@@ -62,7 +62,11 @@ private var  binding:FragmentHomeBinding? = null
                 if (!user.expiredTime.isNullOrEmpty()){
                     if(dateTimeFormatter1.parse(user.expiredTime).time>System.currentTimeMillis()){
                         viewModel.isVip.postValue(true)
+                    }else{
+                        viewModel.isVip.postValue(false)
                     }
+                }else{
+                    viewModel.isVip.postValue(false)
                 }
             }
         }

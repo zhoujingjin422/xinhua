@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/iv_vip"
+            app:layout_constraintBottom_toTopOf="@id/fl_vip"
             android:layout_marginBottom="20dp">
 
             <ImageView
@@ -87,23 +87,66 @@
                 android:textColor="#FFC9A9"
                 android:background="@drawable/shape_logout"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <ImageView
-            android:id="@+id/iv_vip"
+        <FrameLayout
+            android:id="@+id/fl_vip"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:src="@mipmap/icon_vip"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/iv_top"
-            android:layout_marginTop="-40dp"/>
+            android:layout_marginTop="-40dp">
+            <ImageView
+                android:id="@+id/iv_not_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:src="@mipmap/icon_not_vip"/>
+            <RelativeLayout
+                android:id="@+id/rl_vip_now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@mipmap/vip_back">
+                <TextView
+                    android:id="@+id/tv_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#804D2E"
+                    android:text="尊敬的用户"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="8dp"/>
+                <TextView
+                    android:id="@+id/has_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#804D2E"
+                    android:layout_below="@id/tv_vip"
+                    android:textSize="12sp"
+                    android:layout_marginStart="20dp"
+                    android:text="你已拥有本APP的全部权限"/>
+                <TextView
+                    android:id="@+id/tv_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/has_vip"
+                    android:text="有效期至："
+                    android:textColor="#804D2E"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="10sp"/>
+            </RelativeLayout>
+        </FrameLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/white"
             android:layout_marginTop="20dp"
             app:cardElevation="0dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_vip">
+            app:layout_constraintTop_toBottomOf="@id/fl_vip">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -143,7 +143,11 @@ class MainActivity : BaseVMActivity() {
                         if (!response.body().data.expiredTime.isNullOrEmpty()){
                             if(dateTimeFormatter1.parse(response.body().data.expiredTime).time>System.currentTimeMillis()){
                                 viewModel.isVip.postValue(true)
+                            }else{
+                                viewModel.isVip.postValue(false)
                             }
+                        }else{
+                            viewModel.isVip.postValue(false)
                         }
                         //获取成功
                         viewModel.user.value = response.body().data
