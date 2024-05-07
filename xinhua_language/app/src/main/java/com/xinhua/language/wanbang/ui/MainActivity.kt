@@ -12,13 +12,10 @@ import com.xinhua.language.wanbang.BaseVMActivity
 import com.xinhua.language.wanbang.ext.getSpValue
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityMainBinding
+import com.xinhua.language.wanbang.bean.DataBean
 import com.xinhua.language.wanbang.bean.FindUserBean
-import com.xinhua.language.wanbang.bean.LoginBean
 import com.xinhua.language.wanbang.bean.MessageEvent
-import com.xinhua.language.wanbang.bean.UserBean
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
-import com.xinhua.language.wanbang.ext.putSpValue
-import com.xinhua.language.wanbang.utils.ActionHelper
 import com.xinhua.language.wanbang.utils.JsonCallback
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -121,11 +118,11 @@ class MainActivity : BaseVMActivity() {
     private lateinit var networkChangeReceiver: NetworkChangeReceiver
 
     override fun initData() {
+        open()
         if (getSpValue("userPhone","").isNotEmpty()){
             findUser()
         }
         changeFragment(1)
-        ActionHelper.doAction("open")
     }
 
     private fun findUser(){
@@ -148,6 +145,22 @@ class MainActivity : BaseVMActivity() {
                         }
                         //获取成功
                         viewModel.user.value = response.body().data
+                    }
+                }
+            })
+
+    }
+    private fun open(){
+        val map = mutableMapOf<String,String>()
+        map["phone"] = getSpValue("userPhone","")
+        map["sub_type"] = "使用包"
+        map["source"] = "android"
+        OkGo.post<DataBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/open") // 请求方式和请求url
+            .upJson(Gson().toJson(map))
+            .execute(object : JsonCallback<DataBean>(DataBean::class.java) {
+                override fun onSuccess(response: Response<DataBean>) {
+                    if (response.body().code==200){
+
                     }
                 }
             })
