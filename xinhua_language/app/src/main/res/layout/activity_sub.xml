@@ -148,25 +148,34 @@
                 app:shape_radius="3dp"
                 app:shape_solidGradientStartColor="#F63E18"
                 app:shape_solidGradientEndColor="#F53C2B">
-                <TextView
-                    android:id="@+id/tv_sub_content"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="￥35  订阅1年会员"
-                    android:textColor="#FCFF11"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/tv_old_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="原价￥40"
-                    android:textSize="14sp"
-                    android:textColor="#F9A097"
-                    android:textStyle="bold"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="20dp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_gravity="center_vertical|end">
+                    <TextView
+                        android:id="@+id/tv_sub_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="￥35  订阅1年会员"
+                        android:textColor="#FCFF11"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/tv_old_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="原价￥40"
+                        android:textSize="14sp"
+                        android:textColor="#F9A097"
+                        android:textStyle="bold"
+                        android:layout_marginStart="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="20dp"/>
+                </LinearLayout>
+
             </com.hjq.shape.layout.ShapeFrameLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

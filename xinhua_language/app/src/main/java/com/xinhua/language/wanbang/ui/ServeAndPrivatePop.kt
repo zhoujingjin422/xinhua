@@ -26,7 +26,7 @@ import kotlin.system.exitProcess
 author:zhoujingjin
 date:2023/8/10
  */
-class ServeAndPrivatePop(context: Context) : BasePopupWindow(context) {
+class ServeAndPrivatePop(context: Context,agree:()->Unit) : BasePopupWindow(context) {
 
     private var str1 =
         "感谢您使用双语字典-新华字典双语版，在您使用本软件过程中，我们可能会对您的部分个人信息进行收集、使用和共享。请您仔细阅读"
@@ -42,6 +42,7 @@ class ServeAndPrivatePop(context: Context) : BasePopupWindow(context) {
         bind?.apply {
             tvAgree.setOnClickListener {
                 context.putSpValue("hasShowPrivacy", true)
+                agree.invoke()
                 dismiss()
             }
             tvNot.setOnClickListener {

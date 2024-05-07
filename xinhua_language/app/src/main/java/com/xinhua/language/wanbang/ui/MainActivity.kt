@@ -121,9 +121,6 @@ class MainActivity : BaseVMActivity() {
     private lateinit var networkChangeReceiver: NetworkChangeReceiver
 
     override fun initData() {
-        if (!getSpValue("hasShowPrivacy", false)) {
-            ServeAndPrivatePop(this).showPopupWindow()
-        }
         if (getSpValue("userPhone","").isNotEmpty()){
             findUser()
         }

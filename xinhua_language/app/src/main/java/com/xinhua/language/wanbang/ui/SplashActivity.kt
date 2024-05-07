@@ -23,12 +23,24 @@ class SplashActivity:AppCompatActivity() {
             finish()
             return
         }
+        if (!getSpValue("hasShowPrivacy", false)) {
+            ServeAndPrivatePop(this) {
+                if (getSpValue("First", true)) {
+                    startActivity(Intent(this, GuideActivity::class.java))
+                } else startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }.showPopupWindow()
+        }else{
+            findViewById<ConstraintLayout>(R.id.parent).postDelayed({
+
+                if (getSpValue("First",true)){
+                    startActivity(Intent(this, GuideActivity::class.java))
+                }else startActivity(Intent(this, MainActivity::class.java))
+                finish()
+
+            },1000L)
+        }
         //延迟两秒，判断是不是首次进入，首次进入到导航页，不是直接进首页
-        findViewById<ConstraintLayout>(R.id.parent).postDelayed({
-            if (getSpValue("First",true)){
-                startActivity(Intent(this, GuideActivity::class.java))
-            }else startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        },1000L)
+
     }
 }

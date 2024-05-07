@@ -83,9 +83,7 @@ class SettingFragment:Fragment() {
             if (it){
                 binding?.ivNotVip?.visibility = View.GONE
                 binding?.rlVipNow?.visibility = View.VISIBLE
-                val result = viewModel.user.value?.expiredTime?.replace("-",".")
-                val date = result?.subSequence(0,10)
-                binding?.tvEndDate?.text = "有效期至：${date}"
+                binding?.tvEndDate?.text = "有效期至：${viewModel.user.value?.expiredTime}"
             }else{
                 binding?.ivNotVip?.visibility = View.VISIBLE
                 binding?.rlVipNow?.visibility = View.GONE
@@ -109,9 +107,7 @@ class SettingFragment:Fragment() {
         if (viewModel.isVip.value==true){
             binding?.rlVipNow?.visibility = View.VISIBLE
             binding?.ivNotVip?.visibility = View.GONE
-            val result = viewModel.user.value?.expiredTime?.replace("-",".")
-            val date = result?.subSequence(0,10)
-            binding?.tvEndDate?.text = "有效期至：${date}"
+            binding?.tvEndDate?.text = "有效期至：${viewModel.user.value?.expiredTime}"
         }else{
             binding?.rlVipNow?.visibility = View.GONE
             binding?.flVip?.visibility = View.GONE
