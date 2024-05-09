@@ -2,18 +2,14 @@ package com.xinhua.language.wanbang.ui
 
 import android.content.Context
 import android.graphics.Color
-import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.SpannedString
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.Gravity
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.xinhua.language.R
 import com.xinhua.language.databinding.PopServePrivateBinding

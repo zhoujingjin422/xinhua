@@ -16,6 +16,7 @@ import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentSettingBinding
 import com.xinhua.language.databinding.FragmentWriteBinding
 import com.xinhua.language.wanbang.bean.UserBean
+import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import com.xinhua.language.wanbang.ext.dateTimeFormatter2
 import com.xinhua.language.wanbang.ext.putSpValue
@@ -44,24 +45,24 @@ class SettingFragment:Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding?.apply {
-            llNotLogin.setOnClickListener {
+            llNotLogin.clickN {
                 startActivityForResult(Intent(requireActivity(),LoginActivity::class.java),10001)
             }
-            flQu.setOnClickListener {
+            flQu.clickN {
                 KefuPop(requireContext()).showPopupWindow()
             }
-            flFw.setOnClickListener {
+            flFw.clickN {
                 WebPlayActivity.startActivity(requireActivity(),"服务条款",Constant.URL_TERMS_OF_USE)
             }
-            flYs.setOnClickListener {
+            flYs.clickN {
                 WebPlayActivity.startActivity(requireActivity(),"隐私协议",Constant.URL_PRIVACY_POLICY)
             }
-            ivNotVip.setOnClickListener {
+            ivNotVip.clickN {
                 if (viewModel.isVip.value == false){
                     startActivity(Intent(requireActivity(),SubActivity::class.java))
                 }
             }
-            tvLogout.setOnClickListener {
+            tvLogout.clickN {
                 viewModel.isVip.postValue(false)
                 viewModel.isLogin.postValue(false)
                 viewModel.user.postValue(null)

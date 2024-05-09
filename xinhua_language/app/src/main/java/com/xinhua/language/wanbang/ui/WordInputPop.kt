@@ -1,23 +1,11 @@
 package com.xinhua.language.wanbang.ui
 
 import android.content.Context
-import android.graphics.Color
-import android.text.Html
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.SpannedString
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.Gravity
-import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.xinhua.language.R
-import com.xinhua.language.databinding.PopServePrivateBinding
 import com.xinhua.language.databinding.PopWordInputBinding
-import com.xinhua.language.wanbang.ext.putSpValue
 import razerdp.basepopup.BasePopupWindow
-import kotlin.system.exitProcess
 
 /**
 author:zhoujingjin

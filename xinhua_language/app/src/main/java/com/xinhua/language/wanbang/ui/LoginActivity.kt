@@ -11,6 +11,7 @@ import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityLoginBinding
 import com.xinhua.language.wanbang.BaseVMActivity
 import com.xinhua.language.wanbang.bean.LoginBean
+import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.JsonCallback
@@ -39,14 +40,14 @@ class LoginActivity:BaseVMActivity() {
                         tvLogin.setTextColor((resources.getColor(R.color.c_b0b0b0)))
                     }
                 }
-                tvLogin.setOnClickListener {
+                tvLogin.clickN {
                     if (cb.isChecked)
                     login()
                     else{
                         Toast.makeText(this@LoginActivity,"请阅读并同意《用户服务协议》和《用户隐私协议》",Toast.LENGTH_SHORT).show()
                     }
                 }
-                tvGetCode.setOnClickListener {
+                tvGetCode.clickN {
                     MyCountDownTimer(60000L,1000L,{time->
                         tvGetCode.text = "${time}s"
                     },{
@@ -56,14 +57,14 @@ class LoginActivity:BaseVMActivity() {
                     tvGetCode.isClickable = false
                     getCode()
                 }
-                tvFwxy.setOnClickListener {
+                tvFwxy.clickN {
                     WebPlayActivity.startActivity(
                         this@LoginActivity,
                         "服务协议",
                         Constant.URL_TERMS_OF_USE
                     )
                 }
-                tvYsxy.setOnClickListener {
+                tvYsxy.clickN {
                     WebPlayActivity.startActivity(
                         this@LoginActivity,
                         "用户隐私协议",

@@ -12,6 +12,7 @@ import com.google.gson.Gson
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentHomeBinding
 import com.xinhua.language.wanbang.bean.UserBean
+import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -38,7 +39,7 @@ private var  binding:FragmentHomeBinding? = null
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding?.apply {
-            flSearch.setOnClickListener {
+            flSearch.clickN {
                if (viewModel.isLogin.value==true){
                     if (viewModel.isVip.value==true){
                         WebPlayPianoActivity.startActivity(requireActivity())

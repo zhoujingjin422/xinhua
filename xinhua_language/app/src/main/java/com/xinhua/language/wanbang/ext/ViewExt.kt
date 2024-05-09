@@ -160,15 +160,18 @@ var lastClickTime = 0L
  * The interval between two clicks is less than [interval] mills
  */
 fun View.clickN(count: Int = 1, interval: Long = 1000, action: () -> Unit) {
-
-    setOnClickListener {
+    
+    setOnClickListener{
+        if(!context.netCheck()){
+            return@setOnClickListener
+        }
         val currentTime = System.currentTimeMillis()
         if (lastClickTime != 0L && (currentTime - lastClickTime > interval)) {
             clickCount = 1
             lastClickTime = currentTime
             return@setOnClickListener
         }
-
+       
         ++clickCount
         lastClickTime = currentTime
 

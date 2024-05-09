@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentWriteBinding
+import com.xinhua.language.wanbang.ext.clickN
 
 class WriteFragment:Fragment() {
     companion object {
@@ -64,7 +65,7 @@ class WriteFragment:Fragment() {
             tvClear.setOnClickListener {
                 binding?.pv?.clearCanvas()
             }
-            tvWordShow.setOnClickListener {
+            tvWordShow.clickN {
                 if(tvWordGray.visibility==View.VISIBLE){
                     tvWordGray.visibility = View.GONE
                     tv.text  ="白底"

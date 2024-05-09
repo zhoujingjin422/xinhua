@@ -16,6 +16,7 @@ import com.xinhua.language.wanbang.bean.MessageEvent
 import com.xinhua.language.wanbang.bean.WechatConent
 import com.xinhua.language.wanbang.bean.WechatPayBean
 import com.xinhua.language.wanbang.bean.WechatPayResult
+import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import com.xinhua.language.wanbang.ext.getSpValue
 import com.xinhua.language.wanbang.utils.Constant
@@ -33,16 +34,16 @@ class SubActivity:BaseVMActivity() {
     private var wechatConent:WechatConent? = null
     override fun initView() {
         binding.apply {
-            ivClose.setOnClickListener { finish() }
+            ivClose.clickN { finish() }
             wechat.isSelected = true
-            wechat.setOnClickListener {
+            wechat.clickN {
                 wechat.isSelected = true
                 alipay.isSelected = false
                 iv1.visibility = View.GONE
                 iv2.visibility = View.VISIBLE
                 type = 1
             }
-            alipay.setOnClickListener {
+            alipay.clickN {
                 wechat.isSelected = false
                 alipay.isSelected = true
                 iv2.visibility = View.GONE
@@ -52,21 +53,21 @@ class SubActivity:BaseVMActivity() {
             val paint = Paint()
             paint.isStrikeThruText = true // 设置中划线
             tvOldPrice.paintFlags = tvOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG // 应用中划线到TextView
-            tvServer.setOnClickListener {
+            tvServer.clickN {
                 WebPlayActivity.startActivity(
                     this@SubActivity,
                     "服务条款",
                     Constant.URL_TERMS_OF_USE
                 )
             }
-            tvPrivate.setOnClickListener {
+            tvPrivate.clickN {
                 WebPlayActivity.startActivity(
                     this@SubActivity,
                     "隐私协议",
                     Constant.URL_PRIVACY_POLICY
                 )
             }
-            flBuy.setOnClickListener {
+            flBuy.clickN {
                 //开买，调用支付方法
                 buyNow()
             }

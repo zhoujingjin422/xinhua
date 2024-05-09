@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.xinhua.language.R
 import com.xinhua.language.databinding.PopNetErrorBinding
 import com.xinhua.language.databinding.PopServePrivateBinding
+import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
 import razerdp.basepopup.BasePopupWindow
