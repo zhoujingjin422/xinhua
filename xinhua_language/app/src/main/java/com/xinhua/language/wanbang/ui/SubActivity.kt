@@ -88,6 +88,7 @@ class SubActivity:BaseVMActivity() {
     private fun getWechatPay(){
         val map = mutableMapOf<String,String>()
         map["total_amount"] = "0.01"
+        map["type"] = "xinhua"
         OkGo.post<WechatPayBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/wxpay/orderStr") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<WechatPayBean>(WechatPayBean::class.java) {
@@ -102,6 +103,7 @@ class SubActivity:BaseVMActivity() {
     private fun getAliPay(){
         val map = mutableMapOf<String,String>()
         map["total_amount"] = "0.01"
+        map["type"] = "xinhua"
         OkGo.post<AliPayBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/alipay/orderStr") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<AliPayBean>(AliPayBean::class.java) {
@@ -138,6 +140,7 @@ class SubActivity:BaseVMActivity() {
     private fun checkWechatPay(){
         val map = mutableMapOf<String,String?>()
         map["out_trade_no"] = wechatConent?.out_trade_no
+        map["type"] = "xinhua"
         OkGo.post<WechatPayResult>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/wxpay/query") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<WechatPayResult>(WechatPayResult::class.java) {
@@ -175,6 +178,7 @@ class SubActivity:BaseVMActivity() {
      fun checkAliPay(outTradeNo:String){
         val map = mutableMapOf<String,String?>()
         map["out_trade_no"] = outTradeNo
+        map["type"] = "xinhua"
         OkGo.post<AliPayResultBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/alipay/query") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<AliPayResultBean>(AliPayResultBean::class.java) {
