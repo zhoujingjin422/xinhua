@@ -88,7 +88,7 @@
                         android:id="@+id/iv_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:src="@mipmap/icon_dui"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -109,6 +109,7 @@
                     app:shape_solidColor="@color/white"
                     app:shape_radius="2dp"
                     app:shape_strokeColor="#C1C1C1"
+                    android:visibility="gone"
                     app:shape_strokeSelectedColor="#6BBD58"
                     app:shape_strokeSize="0.5dp"
                     android:layout_weight="1">

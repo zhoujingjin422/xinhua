@@ -1,4 +1,4 @@
-package com.oxford.tenapp.wxapi;
+package com.cpdtlp.xinhuaandroid;
 
 import android.app.Activity;
 import android.content.Intent;

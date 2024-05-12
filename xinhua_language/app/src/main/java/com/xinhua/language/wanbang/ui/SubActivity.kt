@@ -30,12 +30,12 @@ import java.text.SimpleDateFormat
 
 class SubActivity:BaseVMActivity() {
     private val binding by binding<ActivitySubBinding>(R.layout.activity_sub)
-    private var type = 1
+    private var type = 2
     private var wechatConent:WechatConent? = null
     override fun initView() {
         binding.apply {
             ivClose.clickN { finish() }
-            wechat.isSelected = true
+            alipay.isSelected = true
             wechat.clickN {
                 wechat.isSelected = true
                 alipay.isSelected = false
