@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\xinhua_language_one\\xinhua_language\\app\\xinhua.jks')
+            storePassword 'com.cpdtlp.xinhuaandroid'
+            keyAlias 'xinhua'
+            keyPassword 'com.cpdtlp.xinhuaandroid'
+        }
+    }
     compileSdkVersion 33
     defaultConfig {
 //        com.cp.dtlp.xinhua.android
@@ -21,6 +29,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
 
         }
 
