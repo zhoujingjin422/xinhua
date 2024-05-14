@@ -89,7 +89,7 @@ class SubActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String>()
         map["total_amount"] = "0.01"
         map["type"] = "xinhua"
-        OkGo.post<WechatPayBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/wxpay/orderStr") // 请求方式和请求url
+        OkGo.post<WechatPayBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/pay/wxpay/orderStr") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<WechatPayBean>(WechatPayBean::class.java) {
                 override fun onSuccess(response: Response<WechatPayBean>) {
@@ -104,7 +104,7 @@ class SubActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String>()
         map["total_amount"] = "0.01"
         map["type"] = "xinhua"
-        OkGo.post<AliPayBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/alipay/orderStr") // 请求方式和请求url
+        OkGo.post<AliPayBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/pay/alipay/orderStr") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<AliPayBean>(AliPayBean::class.java) {
                 override fun onSuccess(response: Response<AliPayBean>) {
@@ -141,7 +141,7 @@ class SubActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String?>()
         map["out_trade_no"] = wechatConent?.out_trade_no
         map["type"] = "xinhua"
-        OkGo.post<WechatPayResult>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/wxpay/query") // 请求方式和请求url
+        OkGo.post<WechatPayResult>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/pay/wxpay/query") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<WechatPayResult>(WechatPayResult::class.java) {
                 override fun onSuccess(response: Response<WechatPayResult>) {
@@ -163,7 +163,7 @@ class SubActivity:BaseVMActivity() {
 //        map["original_transaction_id"] = transactionId
         map["phone"] = getSpValue("userPhone","")
         map["expiredTime"] =time
-        OkGo.post<DataBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/updateUserExpiredTime") // 请求方式和请求url
+        OkGo.post<DataBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/updateUserExpiredTime") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<DataBean>(DataBean::class.java) {
                 override fun onSuccess(response: Response<DataBean>) {
@@ -179,7 +179,7 @@ class SubActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String?>()
         map["out_trade_no"] = outTradeNo
         map["type"] = "xinhua"
-        OkGo.post<AliPayResultBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/pay/alipay/query") // 请求方式和请求url
+        OkGo.post<AliPayResultBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/pay/alipay/query") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<AliPayResultBean>(AliPayResultBean::class.java) {
                 override fun onSuccess(response: Response<AliPayResultBean>) {

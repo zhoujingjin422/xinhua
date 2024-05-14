@@ -128,7 +128,7 @@ class MainActivity : BaseVMActivity() {
     private fun findUser(){
         val map = mutableMapOf<String,String>()
         map["phone"] = getSpValue("userPhone","")
-        OkGo.post<FindUserBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/findUser") // 请求方式和请求url
+        OkGo.post<FindUserBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/findUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<FindUserBean>(FindUserBean::class.java) {
                 override fun onSuccess(response: Response<FindUserBean>) {
@@ -155,7 +155,7 @@ class MainActivity : BaseVMActivity() {
         map["phone"] = getSpValue("userPhone","")
         map["sub_type"] = "使用包"
         map["source"] = "android"
-        OkGo.post<DataBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/open") // 请求方式和请求url
+        OkGo.post<DataBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/open") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<DataBean>(DataBean::class.java) {
                 override fun onSuccess(response: Response<DataBean>) {

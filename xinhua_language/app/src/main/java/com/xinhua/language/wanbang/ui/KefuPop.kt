@@ -19,7 +19,7 @@ class KefuPop(context: Context) : BasePopupWindow(context) {
         val bind = DataBindingUtil.bind<PopKefuBinding>(contentView)
         bind?.apply {
            ivClose.setOnClickListener { dismiss() }
-            Glide.with(context).asBitmap().load("http://xuse.qlhuyxy.cn/xinhua/qrcode.jpg").into(ivErw)
+            Glide.with(context).asBitmap().load("https://xinhuaapi.cpdtlp.com.cn/dict/qrcode/qrcode.jpg").into(ivErw)
         }
         setOutSideDismiss(true)
         popupGravity = Gravity.CENTER

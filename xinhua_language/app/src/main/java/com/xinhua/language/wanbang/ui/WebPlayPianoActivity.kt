@@ -56,7 +56,7 @@ private var startUrl:String? = null
      * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
      */
     override fun initData() {
-       binding.webView.loadUrl("https://cndicttest.cpdtlp.com.cn/dict/query.html?platform=android")
+       binding.webView.loadUrl("https://xinhuaapi.cpdtlp.com.cn/dict/query.html?platform=android")
     }
 
 

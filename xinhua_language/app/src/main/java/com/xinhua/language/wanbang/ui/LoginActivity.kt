@@ -81,7 +81,7 @@ class LoginActivity:BaseVMActivity() {
         val map = mutableMapOf<String,String>()
         map["phone"] = binding.etPhone.text.toString()
         map["type"] = "xinhua_dict&prod"
-        OkGo.post<String>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/sendVerifyCode") // 请求方式和请求url
+        OkGo.post<String>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/sendVerifyCode") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>) {
@@ -104,7 +104,7 @@ class LoginActivity:BaseVMActivity() {
 
         map["phone"] = binding.etPhone.text.toString()
         map["code"] = binding.etCode.text.toString()
-        OkGo.post<LoginBean>("https://cndicttest.cpdtlp.com.cn/dict_serve/api/user/registerUser") // 请求方式和请求url
+        OkGo.post<LoginBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/registerUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<LoginBean>(LoginBean::class.java) {
                 override fun onSuccess(response: Response<LoginBean>) {
