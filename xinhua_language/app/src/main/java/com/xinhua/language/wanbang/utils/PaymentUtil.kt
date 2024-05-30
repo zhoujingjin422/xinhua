@@ -4,13 +4,9 @@ import android.app.Activity
 import android.os.AsyncTask
 import android.widget.Toast
 import com.alipay.sdk.app.PayTask
-import com.google.gson.Gson
-import com.lzy.okgo.OkGo
-import com.lzy.okgo.model.Response
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xinhua.language.wanbang.bean.WechatConent
-import com.xinhua.language.wanbang.bean.WechatPayResult
 import com.xinhua.language.wanbang.ui.SubActivity
 import org.json.JSONObject
 
@@ -19,8 +15,8 @@ class PaymentUtil(private val activity: Activity) {
     // 微信支付
     //appId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: String, packageValue: String, sign: String)
     fun payWithWeChat(wechatConent: WechatConent) {
-        val api = WXAPIFactory.createWXAPI(activity, "wx21555d7b0beb1c03")
-        api.registerApp("wx21555d7b0beb1c03")
+        val api = WXAPIFactory.createWXAPI(activity, Constant.APP_ID)
+        api.registerApp(Constant.APP_ID)
         val req = PayReq()
         req.appId = wechatConent.appid
         req.partnerId = wechatConent.partnerid

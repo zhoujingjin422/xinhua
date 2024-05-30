@@ -9,11 +9,11 @@ import com.lzy.okgo.model.HttpHeaders
 import com.lzy.okgo.model.HttpParams
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xinhua.language.wanbang.utils.AppOpenManager
+import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.appModule
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import java.util.Queue
 
 /**
 author:zhoujingjin
@@ -31,7 +31,7 @@ class AutoClickApplication:Application() {
 //            appOpenManager?.fetchAd()
 //        }
         val api = WXAPIFactory.createWXAPI(this, null)
-        api.registerApp("wx21555d7b0beb1c03")
+        api.registerApp(Constant.APP_ID)
         startKoin {
             androidContext(this@AutoClickApplication)
             modules(appModule)

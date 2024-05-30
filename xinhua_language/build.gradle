@@ -1,4 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    var = '/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/xinhua.jks'
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.8.0"
     repositories {

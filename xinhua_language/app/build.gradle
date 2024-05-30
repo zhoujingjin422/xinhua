@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('E:\\xinhua_language_one\\xinhua_language\\app\\xinhua.jks')
+            storeFile file(var)
             storePassword 'com.cpdtlp.xinhuaandroid'
             keyAlias 'xinhua'
             keyPassword 'com.cpdtlp.xinhuaandroid'
@@ -19,7 +19,7 @@ android {
         applicationId "com.cpdtlp.xinhuaandroid"
         minSdk 24
         targetSdk 33
-        versionCode 8
+        versionCode 9
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

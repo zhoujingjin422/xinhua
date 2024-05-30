@@ -19,6 +19,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xinhua.language.R;
 import com.xinhua.language.wanbang.bean.MessageEvent;
+import com.xinhua.language.wanbang.utils.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,7 +31,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        api = WXAPIFactory.createWXAPI(this, "wx21555d7b0beb1c03", false);
+        api = WXAPIFactory.createWXAPI(this, Constant.APP_ID, false);
 
         try {
             Intent intent = getIntent();
