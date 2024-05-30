@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="新用户专享优惠价格"
-                android:textColor="#ED1E20"
+                android:textColor="#C81A21"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
@@ -147,8 +147,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 app:shape_radius="3dp"
-                app:shape_solidGradientStartColor="#F63E18"
-                app:shape_solidGradientEndColor="#F53C2B">
+                app:shape_solidGradientStartColor="#A02926"
+                app:shape_solidGradientEndColor="#A02926">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
