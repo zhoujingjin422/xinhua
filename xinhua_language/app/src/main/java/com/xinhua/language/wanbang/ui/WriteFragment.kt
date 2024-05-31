@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentWriteBinding
 import com.xinhua.language.wanbang.ext.clickN
@@ -18,7 +19,6 @@ class WriteFragment:Fragment() {
         }
     }
     private var binding:FragmentWriteBinding? = null
-    private var word = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,48 +32,8 @@ class WriteFragment:Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding?.apply {
-            tvClick.setOnClickListener {
-                //弹出输入框
-                WordInputPop(requireContext(),tvWord.text.toString()) { word ->
-                    if (word.isEmpty()) {
-                        rlWord.visibility = View.GONE
-                        tvClick.visibility = View.VISIBLE
-                    } else {
-                        rlWord.visibility = View.VISIBLE
-                        tvClick.visibility = View.GONE
-                    }
-                    tvWordGray.text = word
-                    tvWord.text = word
-                    pv.clearCanvas()
-                }.showPopupWindow()
-            }
-           ivChange.setOnClickListener {
-                //弹出输入框
-                WordInputPop(requireContext(),tvWord.text.toString()) { word ->
-                    if (word.isEmpty()) {
-                        rlWord.visibility = View.GONE
-                        tvClick.visibility = View.VISIBLE
-                    } else {
-                        rlWord.visibility = View.VISIBLE
-                        tvClick.visibility = View.GONE
-                    }
-                    tvWordGray.text = word
-                    tvWord.text = word
-                    pv.clearCanvas()
-                }.showPopupWindow()
-            }
-            tvClear.setOnClickListener {
-                binding?.pv?.clearCanvas()
-            }
-            tvWordShow.clickN {
-                if(tvWordGray.visibility==View.VISIBLE){
-                    tvWordGray.visibility = View.GONE
-                    tv.text  ="白底"
-                }else{
-                    tvWordGray.visibility = View.VISIBLE
-                    tv.text  ="灰字"
-                }
-            }
+            rv.layoutManager = LinearLayoutManager(context)
         }
+
     }
 }

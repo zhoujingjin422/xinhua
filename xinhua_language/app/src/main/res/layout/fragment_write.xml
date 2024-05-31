@@ -6,162 +6,26 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#FAFAFA">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请输入你想练习的汉字"
-            android:textSize="18sp"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center_horizontal"/>
-        <com.hjq.shape.layout.ShapeFrameLayout
-            android:id="@+id/tv_click"
-            android:layout_width="126dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center_horizontal"
-            app:shape_solidColor="#E94748"
-            app:shape_radius="22dp"
-            android:visibility="visible"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击输入"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:drawablePadding="5dp"
-                android:textColor="@color/white"
-                android:visibility="visible"
-                android:layout_gravity="center"
-                app:drawableStartCompat="@mipmap/icon_click_write" />
-        </com.hjq.shape.layout.ShapeFrameLayout>
-            <RelativeLayout
-                android:id="@+id/rl_word"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_marginTop="10dp"
-                android:layout_height="64dp">
-                <FrameLayout
-                    android:id="@+id/fl_word"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@mipmap/small_back">
-                    <TextView
-                        android:id="@+id/tv_word"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textSize="40sp"
-                        android:textColor="@color/black"
-                        android:text=""/>
-                </FrameLayout>
-                <ImageView
-                    android:id="@+id/iv_change"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/fl_word"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="20dp"
-                    android:src="@mipmap/icon_write_right"/>
-            </RelativeLayout>
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/shape_top_white"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="32dp"
-                    android:src="@mipmap/write_back"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_word_gray"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:padding="0dp"
-                    android:text=""
-                    android:textColor="#D5D5D5"
-                    android:textSize="220sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                    app:layout_constraintEnd_toEndOf="@id/iv_back"
-                    app:layout_constraintStart_toStartOf="@id/iv_back"
-                    app:layout_constraintTop_toTopOf="@id/iv_back" />
-                <com.xinhua.language.wanbang.view.PaintCanvasView
-                    android:id="@+id/pv"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                    app:layout_constraintEnd_toEndOf="@id/iv_back"
-                    app:layout_constraintStart_toStartOf="@id/iv_back"
-                    app:layout_constraintTop_toTopOf="@id/iv_back" />/>
-                <com.hjq.shape.layout.ShapeFrameLayout
-                    android:id="@+id/tv_word_show"
-                    android:layout_width="82dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="31dp"
-                    app:layout_constraintStart_toStartOf="@id/iv_back"
-                    app:layout_constraintTop_toBottomOf="@id/iv_back"
-                    app:shape_solidColor="@color/white"
-                    app:shape_radius="16dp"
-                    app:shape_strokeColor="#666666"
-                    app:shape_strokeSize="0.5dp">
-                    <TextView
-                        android:id="@+id/tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="4dp"
-                        android:gravity="center"
-                        android:text="灰字"
-                        android:layout_gravity="center"
-                        android:textColor="#666666"
-                        app:drawableStartCompat="@mipmap/icon_refresh" />
-                </com.hjq.shape.layout.ShapeFrameLayout>
-                <com.hjq.shape.layout.ShapeFrameLayout
-                    android:id="@+id/tv_clear"
-                    android:layout_width="82dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="31dp"
-                    app:drawableStartCompat="@mipmap/icon_clear"
-                    app:layout_constraintEnd_toEndOf="@id/iv_back"
-                    app:layout_constraintTop_toBottomOf="@id/iv_back"
-                    app:shape_solidColor="@color/white"
-                    app:shape_radius="16dp"
-                    app:shape_strokeColor="#666666"
-                    app:shape_strokeSize="0.5dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="4dp"
-                        android:gravity="center"
-                        android:text="清空"
-                        android:layout_gravity="center"
-                        android:textColor="#666666"
-                        app:drawableStartCompat="@mipmap/icon_clear" />
-                </com.hjq.shape.layout.ShapeFrameLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="70dp"/>
+      <ImageView
+          android:id="@+id/iv_add"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:src="@mipmap/icon_add_pdf"
+          android:layout_marginBottom="30dp"
+          android:layout_marginEnd="20dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
