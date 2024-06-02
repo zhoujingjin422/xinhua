@@ -7,10 +7,12 @@
     </data>
 
     <com.hjq.shape.layout.ShapeConstraintLayout
+        android:id="@+id/sl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:shape_radius="18dp"
+        app:shape_radius="8dp"
         android:padding="16dp"
+        android:layout_marginBottom="10dp"
         app:shape_solidColor="@color/white">
     <ImageView
         android:id="@+id/iv_icon"

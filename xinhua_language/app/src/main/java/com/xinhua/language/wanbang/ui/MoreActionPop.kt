@@ -1,6 +1,8 @@
 package com.xinhua.language.wanbang.ui
 
 import android.content.Context
+import android.graphics.Color
+import android.provider.CalendarContract.Colors
 import androidx.databinding.DataBindingUtil
 import com.xinhua.language.R
 import com.xinhua.language.databinding.PopMoreActionBinding
@@ -24,5 +26,6 @@ class MoreActionPop(context: Context):BasePopupWindow(context) {
                dismiss()
            }
        }
+       setBackgroundColor(Color.TRANSPARENT)
    }
 }
