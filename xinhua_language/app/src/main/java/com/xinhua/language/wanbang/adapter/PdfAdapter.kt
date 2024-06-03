@@ -11,7 +11,7 @@ import com.xinhua.language.wanbang.ui.MoreActionPop
 import com.xinhua.language.wanbang.ui.PdfViewerActivity
 import java.io.File
 
-class PdfAdapter:BaseQuickAdapter<String, BaseDataBindingHolder<ItemPdfBinding>>(R.layout.item_pdf) {
+class PdfAdapter(private val action:()->Unit):BaseQuickAdapter<String, BaseDataBindingHolder<ItemPdfBinding>>(R.layout.item_pdf) {
     override fun convert(holder: BaseDataBindingHolder<ItemPdfBinding>, item: String) {
         holder.dataBinding?.apply {
             tvName.text = getFileNameFromUri(Uri.parse(item))
@@ -23,7 +23,7 @@ class PdfAdapter:BaseQuickAdapter<String, BaseDataBindingHolder<ItemPdfBinding>>
             }
             ivMore.setOnClickListener {
                 //点击弹pop进行操作
-                MoreActionPop(context).showPopupWindow(ivMore)
+                MoreActionPop(context,Uri.parse(item),action,).showPopupWindow(ivMore)
             }
         }
     }

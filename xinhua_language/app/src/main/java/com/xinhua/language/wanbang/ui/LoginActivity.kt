@@ -14,6 +14,7 @@ import com.xinhua.language.wanbang.bean.LoginBean
 import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
+import com.xinhua.language.wanbang.utils.Constant.Companion.DICT_ID
 import com.xinhua.language.wanbang.utils.JsonCallback
 import com.xinhua.language.wanbang.utils.MyCountDownTimer
 
@@ -104,6 +105,8 @@ class LoginActivity:BaseVMActivity() {
 
         map["phone"] = binding.etPhone.text.toString()
         map["code"] = binding.etCode.text.toString()
+        map["dict_id"] = DICT_ID
+
         OkGo.post<LoginBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/registerUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<LoginBean>(LoginBean::class.java) {

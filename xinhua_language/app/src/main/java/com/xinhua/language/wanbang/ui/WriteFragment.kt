@@ -40,7 +40,7 @@ class WriteFragment:Fragment() {
         binding?.apply {
             ivAdd.setOnClickListener {
                 PermissionX.init(this@WriteFragment)
-                    .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .permissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .request { allGranted, grantedList, deniedList ->
                         if (allGranted) {
                             openPdfFilePicker()
@@ -49,7 +49,9 @@ class WriteFragment:Fragment() {
                     }
             }
             rv.layoutManager = LinearLayoutManager(context)
-            adapter = PdfAdapter()
+            adapter = PdfAdapter{
+                updateHistoryList()
+            }
             rv.adapter = adapter
         }
         updateHistoryList()
