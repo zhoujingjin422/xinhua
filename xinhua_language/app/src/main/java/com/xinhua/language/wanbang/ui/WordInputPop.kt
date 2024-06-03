@@ -19,7 +19,10 @@ class WordInputPop(context: Context,content:String, private val action:(word:Str
         bind?.apply {
             tvConfirm.setOnClickListener {
                 dismiss()
+                if (etInput.text.toString().endsWith(".pdf"))
                 action.invoke(etInput.text.toString())
+                else   action.invoke(etInput.text.toString()+".pdf")
+
             }
             etInput.setText(content)
             tvCancel.setOnClickListener {

@@ -2,9 +2,12 @@ package com.xinhua.language.wanbang.ui
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +81,7 @@ class WriteFragment:Fragment() {
             }
         }
     }
+
     private fun savePdfUri(uri: String) {
         val sharedPreferences = requireActivity().getSharedPreferences("pdf_history", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

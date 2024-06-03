@@ -14,7 +14,11 @@ import java.io.File
 class PdfAdapter(private val action:()->Unit):BaseQuickAdapter<String, BaseDataBindingHolder<ItemPdfBinding>>(R.layout.item_pdf) {
     override fun convert(holder: BaseDataBindingHolder<ItemPdfBinding>, item: String) {
         holder.dataBinding?.apply {
-            tvName.text = getFileNameFromUri(Uri.parse(item))
+            if (item.contains("|")){
+                tvName.text = item.split("|")[0]
+            }else{
+                tvName.text = getFileNameFromUri(Uri.parse(item))
+            }
             sl.setOnClickListener {
                 val intent = Intent(context, PdfViewerActivity::class.java).apply {
                     putExtra("pdfUri", item)
@@ -23,7 +27,7 @@ class PdfAdapter(private val action:()->Unit):BaseQuickAdapter<String, BaseDataB
             }
             ivMore.setOnClickListener {
                 //点击弹pop进行操作
-                MoreActionPop(context,Uri.parse(item),action,).showPopupWindow(ivMore)
+                MoreActionPop(context,Uri.parse(item),action).showPopupWindow(ivMore)
             }
         }
     }
