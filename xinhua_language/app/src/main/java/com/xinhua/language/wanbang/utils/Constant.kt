@@ -5,7 +5,7 @@ date:2022/11/27
  */
 class Constant {
     companion object {
-        const val PRICE = "78"
+        const val PRICE = "0.01"
         const val TYPE = "xinhua"
         const val DICT_ID = "xiandai"
         const val APP_ID = "wx21555d7b0beb1c03"

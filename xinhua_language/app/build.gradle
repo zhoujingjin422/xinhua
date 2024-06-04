@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file(var)
+            storeFile file('E:\\xinhua_language_one\\xinhua_language\\app\\xianhan.jks')
             storePassword 'com.cpdtlp.xianhanandroid'
             keyAlias 'xianhan'
             keyPassword 'com.cpdtlp.xianhanandroid'
