@@ -19,8 +19,13 @@ class PdfViewerActivity: BaseVMActivity() {
     override fun initView() {
         val pdfUri = intent.getStringExtra("pdfUri")
         pdfUri?.let {
-            binding.toolBar.title = getFileNameFromUri(Uri.parse(it))
-            loadPdf(Uri.parse(it))
+            if (it.contains("|")){
+                binding.toolBar.title = it.split("|")[0]
+                loadPdf(Uri.parse(it.split("|")[1]))
+            }else{
+                binding.toolBar.title = getFileNameFromUri(Uri.parse(it))
+                loadPdf(Uri.parse(it))
+            }
         }
     }
    private fun getFileNameFromUri(uri: Uri): String {
