@@ -24,7 +24,7 @@
             android:textSize="18sp"
             android:gravity="center"
             android:layout_marginTop="30dp"
-            android:text="双语字典-新华字典双语版\n服务协议与隐私政策"/>
+            android:text="现代汉语词典汉英版\n服务协议与隐私政策"/>
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="0dp"
@@ -33,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="感谢您使用双语字典-新华字典双语版，在您使用本软件过程中，我们可能会对您的部分个人信息进行收集、使用和共享。请您仔细阅读《服务协议》与《隐私政策》，并确定完全了解我们对您个人信息的处理規则。如您同意 《服务协议》与《隐私政策》，请点击 “同意”开始使用双语字典-新华字典双语版，我们会尽全力保护您的个人信息安全。"
+            android:text="感谢您使用现代汉语词典汉英版，在您使用本软件过程中，我们可能会对您的部分个人信息进行收集、使用和共享。请您仔细阅读《服务协议》与《隐私政策》，并确定完全了解我们对您个人信息的处理規则。如您同意 《服务协议》与《隐私政策》，请点击 “同意”开始使用双语字典-新华字典双语版，我们会尽全力保护您的个人信息安全。"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

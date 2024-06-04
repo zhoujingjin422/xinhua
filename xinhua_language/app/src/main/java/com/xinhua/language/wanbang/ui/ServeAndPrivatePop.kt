@@ -25,12 +25,12 @@ date:2023/8/10
 class ServeAndPrivatePop(context: Context,agree:()->Unit) : BasePopupWindow(context) {
 
     private var str1 =
-        "感谢您使用双语字典-新华字典双语版，在您使用本软件过程中，我们可能会对您的部分个人信息进行收集、使用和共享。请您仔细阅读"
+        "感谢您使用现代汉语词典汉英版，在您使用本软件过程中，我们可能会对您的部分个人信息进行收集、使用和共享。请您仔细阅读"
     private var str2 = "《服务协议》"
     private var str3 = "与"
     private var str4 = "《隐私政策》"
     private var str5 =
-        "，并确定完全了解我们对您个人信息的处理規则。如您同意 《服务协议》与《隐私政策》，请点击 “同意”开始使用双语字典-新华字典双语版，我们会尽全力保护您的个人信息安全。"
+        "，并确定完全了解我们对您个人信息的处理規则。如您同意 《服务协议》与《隐私政策》，请点击 “同意”开始使用现代汉语词典汉英版，我们会尽全力保护您的个人信息安全。"
 
     init {
         setContentView(R.layout.pop_serve_private)

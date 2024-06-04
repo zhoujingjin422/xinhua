@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@mipmap/nav_icon_back"
             android:layout_marginTop="24dp"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/black"/>
         <WebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"
