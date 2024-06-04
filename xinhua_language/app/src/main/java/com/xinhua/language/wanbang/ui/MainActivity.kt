@@ -16,6 +16,7 @@ import com.xinhua.language.wanbang.bean.DataBean
 import com.xinhua.language.wanbang.bean.FindUserBean
 import com.xinhua.language.wanbang.bean.MessageEvent
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
+import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.Constant.Companion.DICT_ID
 import com.xinhua.language.wanbang.utils.JsonCallback
 import org.greenrobot.eventbus.EventBus
@@ -130,7 +131,7 @@ class MainActivity : BaseVMActivity() {
         val map = mutableMapOf<String,String>()
         map["phone"] = getSpValue("userPhone","")
         map["dict_id"] = DICT_ID
-        OkGo.post<FindUserBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/findUser") // 请求方式和请求url
+        OkGo.post<FindUserBean>(Constant.BASE_URL+"dict_serve/api/user/findUser") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<FindUserBean>(FindUserBean::class.java) {
                 override fun onSuccess(response: Response<FindUserBean>) {
@@ -158,7 +159,7 @@ class MainActivity : BaseVMActivity() {
         map["sub_type"] = "使用包"
         map["source"] = "android"
         map["dict_id"] = DICT_ID
-        OkGo.post<DataBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/open") // 请求方式和请求url
+        OkGo.post<DataBean>(Constant.BASE_URL+"dict_serve/api/user/open") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<DataBean>(DataBean::class.java) {
                 override fun onSuccess(response: Response<DataBean>) {

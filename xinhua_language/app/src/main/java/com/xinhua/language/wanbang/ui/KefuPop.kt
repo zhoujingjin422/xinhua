@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.xinhua.language.R
 import com.xinhua.language.databinding.PopKefuBinding
 import com.xinhua.language.databinding.PopNetErrorBinding
+import com.xinhua.language.wanbang.utils.Constant
 import razerdp.basepopup.BasePopupWindow
 
 /**
@@ -19,7 +20,7 @@ class KefuPop(context: Context) : BasePopupWindow(context) {
         val bind = DataBindingUtil.bind<PopKefuBinding>(contentView)
         bind?.apply {
            ivClose.setOnClickListener { dismiss() }
-            Glide.with(context).asBitmap().load("https://xinhuaapi.cpdtlp.com.cn/dict/qrcode/qrcode.jpg").into(ivErw)
+            Glide.with(context).asBitmap().load(Constant.BASE_URL+"dict/qrcode/qrcode.jpg").into(ivErw)
         }
         setOutSideDismiss(true)
         popupGravity = Gravity.CENTER

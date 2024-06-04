@@ -11,6 +11,7 @@ import android.webkit.WebViewClient
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityWebPlayPianoBinding
 import com.xinhua.language.wanbang.BaseVMActivity
+import com.xinhua.language.wanbang.utils.Constant
 
 
 /*** 选择服务界面 */
@@ -56,7 +57,7 @@ private var startUrl:String? = null
      * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
      */
     override fun initData() {
-       binding.webView.loadUrl("https://xinhuaapi.cpdtlp.com.cn/dict/xiandai/query.html?platform=android")
+       binding.webView.loadUrl(Constant.BASE_URL+"dict/xiandai/query.html?platform=android")
     }
 
 
