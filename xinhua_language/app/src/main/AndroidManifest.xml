@@ -36,7 +36,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.cpdtlp.xinhuaandroid.WXPayEntryActivity"
+            android:name="com.cpdtlp.xianhanandroid.WXPayEntryActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
             android:label="@string/app_name"

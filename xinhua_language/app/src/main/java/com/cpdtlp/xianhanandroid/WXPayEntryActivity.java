@@ -1,4 +1,4 @@
-package com.cpdtlp.xinhuaandroid;
+package com.cpdtlp.xianhanandroid;
 
 import android.app.Activity;
 import android.content.Intent;

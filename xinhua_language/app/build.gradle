@@ -8,15 +8,15 @@ android {
     signingConfigs {
         debug {
             storeFile file(var)
-            storePassword 'com.cpdtlp.xinhuaandroid'
-            keyAlias 'xinhua'
-            keyPassword 'com.cpdtlp.xinhuaandroid'
+            storePassword 'com.cpdtlp.xianhanandroid'
+            keyAlias 'xianhan'
+            keyPassword 'com.cpdtlp.xianhanandroid'
         }
     }
     compileSdkVersion 33
     defaultConfig {
 //        com.cp.dtlp.xinhua.android
-        applicationId "com.cpdtlp.xinhuaandroid"
+        applicationId "com.cpdtlp.xianhanandroid"
         minSdk 24
         targetSdk 33
         versionCode 9
