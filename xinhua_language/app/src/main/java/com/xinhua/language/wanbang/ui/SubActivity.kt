@@ -38,8 +38,8 @@ class SubActivity:BaseVMActivity() {
     override fun initView() {
         binding.apply {
             ivClose.clickN { finish() }
-            alipay.isSelected = true
-            wechat.clickN {
+            wechat.isSelected = true
+            alipay.clickN {
                 wechat.isSelected = true
                 alipay.isSelected = false
                 iv1.visibility = View.GONE

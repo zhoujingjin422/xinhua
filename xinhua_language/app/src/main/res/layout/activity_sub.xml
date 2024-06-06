@@ -108,8 +108,8 @@
                     android:layout_marginStart="13dp"
                     app:shape_solidColor="@color/white"
                     app:shape_radius="2dp"
-                    app:shape_strokeColor="#C1C1C1"
                     android:visibility="gone"
+                    app:shape_strokeColor="#C1C1C1"
                     app:shape_strokeSelectedColor="#6BBD58"
                     app:shape_strokeSize="0.5dp"
                     android:layout_weight="1">
