@@ -97,7 +97,7 @@ class WriteFragment:Fragment() {
     }
 
     private var pdfList = mutableListOf<String>()
-    private fun updateHistoryList() {
+     fun updateHistoryList() {
         pdfList.clear()
         pdfList.addAll(loadPdfUris())
         adapter.setList(pdfList)

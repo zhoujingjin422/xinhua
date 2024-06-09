@@ -175,9 +175,17 @@ class MainActivity : BaseVMActivity() {
         event?.let {
            if (it.code=="UPDATE_USER"){
                findUser()
+           }else if (it.code=="UNBIND"){
+                viewModel.isVip.postValue(false)
+                viewModel.isLogin.postValue(false)
+                viewModel.user.postValue(null)
+               if(fragmentList[2] is WriteFragment){
+                  val fragment = fragmentList[2] as WriteFragment
+                   fragment.updateHistoryList()
+               }
+               }
            }
         }
-    }
 
     override fun onResume() {
         super.onResume()

@@ -18,6 +18,8 @@ class PdfViewerActivity: BaseVMActivity() {
 
     override fun initView() {
         val pdfUri = intent.getStringExtra("pdfUri")
+        setSupportActionBar(binding.toolBar)
+        binding.toolBar.setNavigationOnClickListener { finish() }
         pdfUri?.let {
             if (it.contains("|")){
                 binding.toolBar.title = it.split("|")[0]

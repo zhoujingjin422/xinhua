@@ -58,6 +58,9 @@
        <activity android:name=".wanbang.ui.PdfViewerActivity"
             android:screenOrientation="portrait"
             />
+       <activity android:name=".wanbang.ui.AccountSafeActivity"
+            android:screenOrientation="portrait"
+            />
         <receiver android:name=".wanbang.ui.NetworkChangeReceiver"
             tools:ignore="Instantiatable" />
         <provider
