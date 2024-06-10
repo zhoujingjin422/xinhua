@@ -2,6 +2,7 @@ package com.xinhua.language.wanbang.adapter
 
 import android.content.Intent
 import android.net.Uri
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -27,21 +28,31 @@ class PdfAdapter(private val action:()->Unit):BaseQuickAdapter<String, BaseDataB
             }
             ivMore.setOnClickListener {
                 //点击弹pop进行操作
-                MoreActionPop(context,Uri.parse(item),action).showPopupWindow(ivMore)
+                if (item.contains("|")){
+                    MoreActionPop(context,Uri.parse(item.split("|")[1]),action).showPopupWindow(ivMore)
+                }else{
+                    MoreActionPop(context,Uri.parse(item),action).showPopupWindow(ivMore)
+
+                }
             }
         }
     }
     private fun getFileNameFromUri(uri: Uri): String {
-        var fileName = "Unknown"
-        val cursor = context.contentResolver.query(uri, null, null, null, null)
-        cursor?.use {
-            if (it.moveToFirst()) {
-                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                if (nameIndex != -1) {
-                    fileName = it.getString(nameIndex)
+        var result: String? = null
+        if (uri.scheme.equals("content")) {
+            val cursor = context.contentResolver.query(uri, null, null, null, null)
+            cursor.use { cursor ->
+                if (cursor != null && cursor.moveToFirst()) {
+                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (nameIndex != -1) {
+                        result = cursor.getString(nameIndex)
+                    }
                 }
             }
         }
-        return fileName
+        if (result == null) {
+            result = uri.lastPathSegment
+        }
+        return result!!
     }
 }

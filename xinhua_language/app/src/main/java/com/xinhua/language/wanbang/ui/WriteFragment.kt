@@ -1,13 +1,11 @@
 package com.xinhua.language.wanbang.ui
 
 import android.Manifest
+import android.R.attr
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +16,7 @@ import com.permissionx.guolindev.PermissionX
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentWriteBinding
 import com.xinhua.language.wanbang.adapter.PdfAdapter
+
 
 class WriteFragment:Fragment() {
     companion object {
@@ -72,6 +71,8 @@ class WriteFragment:Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_PDF_FILE && resultCode == Activity.RESULT_OK) {
             data?.data?.also { uri ->
+                val takeFlags: Int = data.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                requireActivity().contentResolver.takePersistableUriPermission(uri, takeFlags)
                 savePdfUri(uri.toString())
                 updateHistoryList()
                 val intent = Intent(context, PdfViewerActivity::class.java).apply {

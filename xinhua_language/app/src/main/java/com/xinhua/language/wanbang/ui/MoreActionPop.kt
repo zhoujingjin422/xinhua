@@ -66,13 +66,17 @@ class MoreActionPop(context: Context, uri: Uri, private val action: () -> Unit) 
         val sharedPreferences = context.getSharedPreferences("pdf_history", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val historySet = sharedPreferences.getStringSet("pdf_uris", mutableSetOf())?.toMutableSet()
+        var older = oldUri
+        if(oldUri.contains("|")){
+            older = oldUri.split("|")[1]
+        }
         val newHistorySet = historySet?.map {
             val parts = it.split("|")
             if (parts.size>1){
-                if (parts[1] == oldUri) "$newName|$oldUri" else it
+                if (parts[1] == older) "$newName|$older" else it
             }else{
-                if (it==oldUri){
-                    "$newName|$oldUri"
+                if (it==older){
+                    "$newName|$older"
                 }else{
                     it
                 }

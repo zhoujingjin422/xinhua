@@ -6,8 +6,7 @@ import android.widget.Toast
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityPdfViewerBinding
 import com.xinhua.language.wanbang.BaseVMActivity
-import java.io.File
-import java.io.IOException
+
 
 /**
 author:zhoujingjin
@@ -18,8 +17,6 @@ class PdfViewerActivity: BaseVMActivity() {
 
     override fun initView() {
         val pdfUri = intent.getStringExtra("pdfUri")
-        setSupportActionBar(binding.toolBar)
-        binding.toolBar.setNavigationOnClickListener { finish() }
         pdfUri?.let {
             if (it.contains("|")){
                 binding.toolBar.title = it.split("|")[0]
@@ -29,19 +26,27 @@ class PdfViewerActivity: BaseVMActivity() {
                 loadPdf(Uri.parse(it))
             }
         }
+        setSupportActionBar(binding.toolBar)
+        binding.toolBar.setNavigationOnClickListener { finish() }
+
     }
    private fun getFileNameFromUri(uri: Uri): String {
-        var fileName = "Unknown"
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        cursor?.use {
-            if (it.moveToFirst()) {
-                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                if (nameIndex != -1) {
-                    fileName = it.getString(nameIndex)
-                }
-            }
-        }
-        return fileName
+       var result: String? = null
+       if (uri.scheme.equals("content")) {
+           val cursor = contentResolver.query(uri, null, null, null, null)
+           cursor.use { cursor ->
+               if (cursor != null && cursor.moveToFirst()) {
+                   val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                   if (nameIndex != -1) {
+                       result = cursor.getString(nameIndex)
+                   }
+               }
+           }
+       }
+       if (result == null) {
+           result = uri.lastPathSegment
+       }
+       return result!!
     }
     private fun loadPdf(uri: Uri) {
         try {
@@ -57,7 +62,7 @@ class PdfViewerActivity: BaseVMActivity() {
                     }
                     .load()
             }
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Toast.makeText(this, "Failed to open PDF file: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
