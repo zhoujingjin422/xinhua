@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/xianhan.jks')
+            storeFile file('E:\\xinhua_language_one\\xinhua_language\\app\\xianhan.jks')
             storePassword 'com.cpdtlp.xianhanandroid'
             keyAlias 'xianhan'
             keyPassword 'com.cpdtlp.xianhanandroid'
@@ -29,8 +29,6 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
-
         }
 
         release {
