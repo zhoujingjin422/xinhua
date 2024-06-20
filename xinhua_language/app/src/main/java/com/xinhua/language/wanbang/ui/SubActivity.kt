@@ -166,6 +166,7 @@ class SubActivity:BaseVMActivity() {
 //        map["original_transaction_id"] = transactionId
         map["phone"] = getSpValue("userPhone","")
         map["expiredTime"] =time
+        map["dict_id"] = Constant.DICT_ID
         OkGo.post<DataBean>(Constant.BASE_URL+"dict_serve/api/user/updateUserExpiredTime") // 请求方式和请求url
             .upJson(Gson().toJson(map))
             .execute(object : JsonCallback<DataBean>(DataBean::class.java) {
