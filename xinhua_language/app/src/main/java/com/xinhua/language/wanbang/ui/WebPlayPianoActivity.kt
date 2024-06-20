@@ -2,6 +2,7 @@ package com.xinhua.language.wanbang.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.webkit.JavascriptInterface
@@ -17,6 +18,7 @@ import com.xinhua.language.wanbang.utils.Constant
 /*** 选择服务界面 */
 class WebPlayPianoActivity : BaseVMActivity() {
     private val binding by binding<ActivityWebPlayPianoBinding>(R.layout.activity_web_play_piano)
+    private var progressDialog:ProgressDialog?=null
     companion object {
         fun startActivity(activity: Activity) {
             activity.startActivity(
@@ -48,7 +50,12 @@ private var startUrl:String? = null
                 }
             }
             webView.webChromeClient = object : WebChromeClient(){
-
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    super.onProgressChanged(view, newProgress)
+                    if (newProgress==100){
+                        progressDialog?.dismiss()
+                    }
+                }
             }
         }
     }
@@ -57,7 +64,8 @@ private var startUrl:String? = null
      * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
      */
     override fun initData() {
-       binding.webView.loadUrl(Constant.BASE_URL+"dict/xiandai/query.html?platform=android")
+        progressDialog = ProgressDialog.show(this, "", "加载中...")
+        binding.webView.loadUrl(Constant.BASE_URL+"dict/xiandai/query.html?platform=android")
     }
 
 
