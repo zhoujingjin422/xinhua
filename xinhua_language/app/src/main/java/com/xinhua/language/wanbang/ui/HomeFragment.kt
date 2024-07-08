@@ -1,6 +1,7 @@
 package com.xinhua.language.wanbang.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.xinhua.language.wanbang.bean.UserBean
 import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.Calendar
 
 class HomeFragment:Fragment() {
     companion object {
@@ -25,7 +27,14 @@ class HomeFragment:Fragment() {
     }
 private var  binding:FragmentHomeBinding? = null
     private val viewModel by sharedViewModel<MainViewModel>()
-
+    private val resImage = arrayOf(R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4
+        ,R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4,
+        R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4
+        ,R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4,
+        R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4,
+        R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4,
+        R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4,
+        R.mipmap.banner_1,R.mipmap.banner_2,R.mipmap.banner_3,R.mipmap.banner_4)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +57,20 @@ private var  binding:FragmentHomeBinding? = null
                     }
                 }else{
                     startActivityForResult(Intent(requireActivity(),LoginActivity::class.java),30001)
+                }
+            }
+            try {
+                ivBanner.setImageResource(resImage[Calendar.getInstance().get(Calendar.DAY_OF_MONTH)-1])
+            }catch (e:Exception){
+
+            }
+            ivBanner.clickN {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://treetop.cpdtlp.com.cn/misc/download-app")).apply {
+                    // 在新的任务栈中启动活动
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                    startActivity(intent)
                 }
             }
         }
