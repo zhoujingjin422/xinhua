@@ -57,6 +57,9 @@ class SettingFragment:Fragment() {
             flYs.clickN {
                 WebPlayActivity.startActivity(requireActivity(),"隐私协议",Constant.URL_PRIVACY_POLICY)
             }
+            flAccount.clickN {
+                startActivity(Intent(requireContext(),AccountSafeActivity::class.java))
+            }
             ivNotVip.clickN {
                 if (viewModel.isVip.value == false){
                     startActivity(Intent(requireActivity(),SubActivity::class.java))
@@ -74,10 +77,12 @@ class SettingFragment:Fragment() {
                 binding?.llNotLogin?.visibility =View.GONE
                 binding?.clLogin?.visibility = View.VISIBLE
                 binding?.flVip?.visibility = View.VISIBLE
+                binding?.flAccount?.visibility = View.VISIBLE
             }else{
                 binding?.llNotLogin?.visibility =View.VISIBLE
                 binding?.clLogin?.visibility = View.GONE
                 binding?.flVip?.visibility = View.GONE
+                binding?.flAccount?.visibility = View.GONE
             }
         })
         viewModel.isVip.observe(viewLifecycleOwner, Observer {
@@ -100,10 +105,12 @@ class SettingFragment:Fragment() {
             binding?.llNotLogin?.visibility =View.GONE
             binding?.clLogin?.visibility = View.VISIBLE
             binding?.flVip?.visibility = View.VISIBLE
+            binding?.flAccount?.visibility = View.VISIBLE
         }else{
             binding?.llNotLogin?.visibility =View.VISIBLE
             binding?.clLogin?.visibility = View.GONE
             binding?.flVip?.visibility = View.GONE
+            binding?.flAccount?.visibility = View.GONE
         }
         if (viewModel.isVip.value==true){
             binding?.rlVipNow?.visibility = View.VISIBLE

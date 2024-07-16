@@ -25,19 +25,22 @@ class AutoClickApplication:Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        initOkGo()
-//        MobileAds.initialize(this) {
-//            loadInterstitialAd(this)
-//            appOpenManager?.fetchAd()
-//        }
-        val api = WXAPIFactory.createWXAPI(this, null)
-        api.registerApp(Constant.APP_ID)
+
         startKoin {
             androidContext(this@AutoClickApplication)
             modules(appModule)
         }
+        initAfterPermissionAgree()
+
+    }
+
+     fun initAfterPermissionAgree() {
+        val api = WXAPIFactory.createWXAPI(this, null)
+        api.registerApp(Constant.APP_ID)
+        initOkGo()
         appOpenManager = AppOpenManager(this)
     }
+
     /*** 初始化OkGo */
     fun initOkGo() {
 

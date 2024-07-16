@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.xinhua.language.R
+import com.xinhua.language.wanbang.AutoClickApplication
 import com.xinhua.language.wanbang.ext.getSpValue
 
 /**
@@ -25,12 +26,16 @@ class SplashActivity:AppCompatActivity() {
         }
         if (!getSpValue("hasShowPrivacy", false)) {
             ServeAndPrivatePop(this) {
+               val app = application as AutoClickApplication
+                app.initAfterPermissionAgree()
                 if (getSpValue("First", true)) {
                     startActivity(Intent(this, GuideActivity::class.java))
                 } else startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }.showPopupWindow()
         }else{
+            val app = application as AutoClickApplication
+            app.initAfterPermissionAgree()
             findViewById<ConstraintLayout>(R.id.parent).postDelayed({
 
                 if (getSpValue("First",true)){

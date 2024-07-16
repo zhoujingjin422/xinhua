@@ -154,16 +154,16 @@ class SubActivity:BaseVMActivity() {
                             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
                             val date = dateFormat.parse(response.body().data.success_time)
                             date.time+=365*24*60*60*1000L
-                            updateUserVipDate(response.body().data.transaction_id,dateTimeFormatter1.format(date))
+                            updateUserVipDate(wechatConent?.out_trade_no,dateTimeFormatter1.format(date))
                         }
                     }
                 }
             })
     }
-    private fun updateUserVipDate( transactionId:String,time:String){
+    private fun updateUserVipDate( out_trade_no:String?,time:String){
 
         val map = mutableMapOf<String,String?>()
-//        map["original_transaction_id"] = transactionId
+        map["out_trade_no"] = out_trade_no
         map["phone"] = getSpValue("userPhone","")
         map["expiredTime"] =time
         OkGo.post<DataBean>("https://xinhuaapi.cpdtlp.com.cn/dict_serve/api/user/updateUserExpiredTime") // 请求方式和请求url
@@ -191,7 +191,7 @@ class SubActivity:BaseVMActivity() {
                             //支付成功，更新一下会员时间
                             val date =dateTimeFormatter1 .parse(response.body().data.sendPayDate)
                             date.time+=365*24*60*60*1000L
-                            updateUserVipDate(response.body().data.traceId,dateTimeFormatter1.format(date))
+                            updateUserVipDate(outTradeNo,dateTimeFormatter1.format(date))
                         }
                     }
                 }

@@ -54,6 +54,9 @@
             />
         <receiver android:name=".wanbang.ui.NetworkChangeReceiver"
             tools:ignore="Instantiatable" />
+        <activity android:name=".wanbang.ui.AccountSafeActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
     <queries>
         <package android:name="com.tencent.mm" />

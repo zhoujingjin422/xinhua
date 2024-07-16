@@ -69,9 +69,7 @@ private var  binding:FragmentHomeBinding? = null
                     // 在新的任务栈中启动活动
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
-                if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                    startActivity(intent)
-                }
+                startActivity(intent)
             }
         }
     }
