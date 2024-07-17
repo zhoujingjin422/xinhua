@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#D2382F"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -17,7 +18,7 @@
             app:navigationIcon="@mipmap/nav_icon_back"
             android:layout_marginTop="24dp"
             app:title="账号安全管理"
-            app:titleTextColor="@color/black"/>
+            app:titleTextColor="@color/white"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
