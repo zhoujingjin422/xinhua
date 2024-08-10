@@ -83,4 +83,5 @@ dependencies {
     implementation 'com.github.getActivity:ShapeView:9.0'
     implementation("org.greenrobot:eventbus:3.3.1")
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation 'org.jsoup:jsoup:1.13.1'
 }
