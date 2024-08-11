@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "新华字典"
 include ':app'
 
- 
+include ':AdSet'

@@ -3,7 +3,6 @@ package com.xinhua.language.wanbang.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,32 +10,26 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.xinhua.language.R
 import com.xinhua.language.databinding.FragmentSettingBinding
-import com.xinhua.language.databinding.FragmentWriteBinding
-import com.xinhua.language.wanbang.bean.ResultItem
 import com.xinhua.language.wanbang.bean.UserBean
 import com.xinhua.language.wanbang.ext.clickN
 import com.xinhua.language.wanbang.ext.dateTimeFormatter1
-import com.xinhua.language.wanbang.ext.dateTimeFormatter2
 import com.xinhua.language.wanbang.ext.putSpValue
 import com.xinhua.language.wanbang.utils.Constant
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import com.xinhua.language.wanbang.utils.StringUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.apache.commons.text.StringEscapeUtils
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.io.IOException
+
 
 class SettingFragment:Fragment() {
     companion object {
@@ -127,37 +120,117 @@ class SettingFragment:Fragment() {
                     "(function() { return document.documentElement.outerHTML; })();"
                 ) { html ->
                     // 在这里解析HTML数据
-                    parseHtml(html)
+                    parseHtml(StringEscapeUtils.unescapeHtml4(html))
                 }
             }
         }
 
         // 加载百度搜索页面
-        webView.loadUrl("https://www.baidu.com/s?wd=安卓")
+        webView.loadUrl("https://www.baidu.com/s?wd=明朝那些事儿")
 
         // 添加JavaScript接口
         webView.addJavascriptInterface(WebAppInterface(requireActivity()), "Android")
         initData()
     }
     private fun parseHtml(html: String) {
-        Log.e("html",html)
-        val decodedHtml = html
-            .replace("\\u003C", "<")
-            .replace("\\u003E", ">")
-            .replace("\\u0026", "&")
-            .replace("\\u003D", "=")
-            .replace("\\u0027", "'")
-            .replace("\\u0022", "\"")
 
-        val doc = Jsoup.parse(decodedHtml)
-        val results: Elements = doc.select("<a ") // 选择<h3>标签中的<a>链接
+        CoroutineScope(Dispatchers.IO).launch {
+            val decodedHtml = html
+                .replace("\\u003C", "<")
+                .replace("\\\"", "\"")
+//            var partiallyDecodedHtml = decodedHtml
+//                .replace("\\&quot;", "&quot;")
+//                .replace("\\&amp;", "&amp;")
+//                .replace("\\&lt;", "&lt;")
+//                .replace("\\&gt;", "&gt;")
+//
+//            // 第二步：将 &quot; 转换为 "
+//            partiallyDecodedHtml = partiallyDecodedHtml
+//                .replace("&quot;", "\"")
+//                .replace("&amp;", "&")
+//                .replace("&lt;", "<")
+//                .replace("&gt;", ">")
+//                .replace("\\u003E", ">")
+//                .replace("\\u0026", "&")
+//                .replace("\\u003D", "=")
+//                .replace("\\u0027", "'")
+//                .replace("\\u0022", "\"")
+//            .replace("\\&quot;", "\"")
+//            val transStr = StringUtils.transStr(decodedHtml)
+            val connect = Jsoup.parse(decodedHtml)
+//            val connect = Jsoup.connect("https://www.baidu.com/s?wd=IOS开发")
+////                .cookies(cookies)
+////                .data("query", "Java")
+//                .userAgent("Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36")
+////                .userAgent("Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36")
+////                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+//                .get()
+            val results: Elements = connect.getElementsByClass("c-result result")
+            val resultsContent: Elements = connect.getElementsByClass("c-result-content")
+//            val results: Elements = connect.getElementsByClass("rw-list-new rw-list-new2")
+//            val results: Elements = connect.select("a[href]")
+//            val aResults: Elements = connect.select("a[href]")
+//            val titleResults: Elements = connect.getElementsByClass("_no-spacing_1bhnz_26 cu-line-clamp1")
+            results.forEachIndexed { index, element ->
+                val linkElement = resultsContent[index]
+                val bikeElement = element.getElementsByClass("_no-spacing_eq0t5_4").first()
+                val link = linkElement.select("article").first().attr("rl-link-href")
+                val tittleElement =  element.getElementsByClass("_no-spacing_1bhnz_26 cu-line-clamp1").first()
+                val descElement =  element.getElementsByClass(" c-color summary-gap_3Jb4I").first()
+                if (tittleElement!=null&&link.isNotEmpty()){
+                    val title = tittleElement.text()
+                    if (descElement!=null){
+                        val desc = descElement.text()
+                        println("element$index:Title: $title")
+                        println("element$index:Desc: $desc")
+                        println("element$index:link: $link")
+                        println("element----------------------------------")
+                    }
+                    if (bikeElement!=null){
+                        val desc = bikeElement.text()
+                        println("element$index:Title: $title")
+                        println("element$index:Desc: $desc")
+                        println("element$index:link: $link")
+                        println("element----------------------------------")
+                    }
+                }
 
-        for (result in results) {
-            val title = result.text()
-            val link = result.attr("href")
-            // 处理每个搜索结果，显示在RecyclerView中或其他UI组件中
-            println("Title: $title, Link: $link")
+            }
+//            descResults.forEachIndexed { index, element ->
+//                val desc = element.text()
+//               val title = titleResults[index].text()?:""
+//                println("Title: $title,desc：${desc}")
+//            }
+//            descResults.forEach {
+//                val title = it.text()
+//                println("desc: $title")
+//            }
+//            val results: Elements = connect.getElementsByTag("a")
+            //        val results: Elements = doc.select("a[href]") // 选择<h3>标签中的<a>链接
+//            for (result in results) {
+////                val results = result.select("a[href]").first()
+//                val resultTittle =  result.getElementsByClass("_no-spacing_1bhnz_26 cu-line-clamp1")
+//                val title = result.text()
+//                val link = result.attr("href")
+//                println("Title: $title, Link: $link")
+////                val cResult = result.getElementsByClass("c-result result")
+////                if (cResult.size>0){
+////
+////                }
+//
+//                // 处理每个搜索结果，显示在RecyclerView中或其他UI组件中
+//            }
         }
+//        val results: Elements = doc.select("a[href]") // 选择<h3>标签中的<a>链接
+//        val results: Elements = doc.getElementsByClass("hint-rcmd-item-container") // 选择<h3>标签中的<a>链接
+//        val results: Elements = doc.getElementsByTag("a")
+////
+//        for (result in results) {
+//            val title = result.text()
+//            val link = result.attr("href")
+//            // 处理每个搜索结果，显示在RecyclerView中或其他UI组件中
+//            println("Title: $title, Link: $link")
+//        }
     }
     class WebAppInterface(private val context: Context) {
 
