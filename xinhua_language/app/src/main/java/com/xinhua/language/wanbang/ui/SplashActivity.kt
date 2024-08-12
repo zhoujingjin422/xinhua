@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.xinhua.language.R
-import com.xinhua.language.wanbang.ext.getSpValue
 
 /**
 author:zhoujingjin
@@ -23,23 +22,24 @@ class SplashActivity:AppCompatActivity() {
             finish()
             return
         }
-        if (!getSpValue("hasShowPrivacy", false)) {
-            ServeAndPrivatePop(this) {
-                if (getSpValue("First", true)) {
-                    startActivity(Intent(this, GuideActivity::class.java))
-                } else startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }.showPopupWindow()
-        }else{
+//        if (!getSpValue("hasShowPrivacy", false)) {
+//            ServeAndPrivatePop(this) {
+//                if (getSpValue("First", true)) {
+//                    startActivity(Intent(this, GuideActivity::class.java))
+//                } else startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+//            }.showPopupWindow()
+//        }else{
             findViewById<ConstraintLayout>(R.id.parent).postDelayed({
 
-                if (getSpValue("First",true)){
-                    startActivity(Intent(this, GuideActivity::class.java))
-                }else startActivity(Intent(this, MainActivity::class.java))
-                finish()
+//                if (getSpValue("First",true)){
+//                    startActivity(Intent(this, GuideActivity::class.java))
+//                }else startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+                startActivity(Intent(this, MainActivity::class.java))
 
             },1000L)
-        }
+//        }
         //延迟两秒，判断是不是首次进入，首次进入到导航页，不是直接进首页
 
     }

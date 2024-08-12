@@ -40,14 +40,4 @@
         <item name="android:colorControlNormal">#D8D8D8</item>
         <item name="android:colorControlActivated">#E9642A</item>
     </style>
-    <style name="CustomSeekbarStyle" >
-        <item name="android:maxHeight">5dp</item>
-        <item name="android:indeterminateOnly">false</item>
-        <item name="android:progressDrawable">@drawable/seekbar_progress_drawable</item>
-        <item name="android:minHeight">5dp</item>
-        <item name="android:thumb">@drawable/circle_blue</item>
-    </style>
-         <style name="checkbox1" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
-             <item name="android:button">@drawable/checkbox_1</item>
-         </style>
 </resources>

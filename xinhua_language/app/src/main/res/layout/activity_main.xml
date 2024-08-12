@@ -6,69 +6,142 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
-        <FrameLayout
-            android:id="@+id/container"
+        android:orientation="vertical"
+        android:background="@mipmap/home_back">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@mipmap/icon_top"
+    android:layout_marginTop="148dp"
+    android:layout_gravity="center_horizontal"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/wkllq_image"/>
+        <com.hjq.shape.layout.ShapeFrameLayout
+            android:id="@+id/sfl"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/card_bottom"
-            android:layout_height="0dp"/>
+            android:layout_height="58dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            app:shape_strokeSize="3dp"
+            app:shape_radius="11dp"
+            android:layout_marginTop="39dp"
+            app:shape_strokeColor="#EA6702">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_search"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击搜索或输入网址"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="49dp"
+                android:textColor="#999999"/>
+        </com.hjq.shape.layout.ShapeFrameLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="搜索推荐"
+    android:layout_marginStart="35dp"
+    android:layout_marginTop="30dp"
+    android:textColor="@color/black"
+    android:textSize="16sp"/>
         <LinearLayout
-            android:id="@+id/card_bottom"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:cardElevation="0dp"
-            android:layout_height="57dp">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="21dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                android:id="@+id/ll_baidu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/iv_baidu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_baidu"/>
                 <TextView
-                    android:id="@+id/iv_1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="现代汉语词典"
-                    android:gravity="center"
+                    android:id="@+id/tv_baidu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/black"
-                    android:layout_weight="1"
-                    android:textSize="10sp"
-                    app:drawableTopCompat="@mipmap/icon_home_selected" />
-                <TextView
-                    android:id="@+id/iv_2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="PDF阅读器"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:textColor="#666666"
-                    app:drawableTopCompat="@mipmap/icon_write" />
-                <TextView
-                    android:id="@+id/iv_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="我的"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:textColor="#666666"
-                    app:drawableTopCompat="@mipmap/icon_setting" />
-                />
+                    android:text="百度"/>
             </LinearLayout>
-
+            <LinearLayout
+                android:id="@+id/ll_sogou"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_sogou"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="搜狗"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_sohu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_souhu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="搜狐"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_sina"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_sina"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="新浪"/>
+            </LinearLayout>
         </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 </layout>

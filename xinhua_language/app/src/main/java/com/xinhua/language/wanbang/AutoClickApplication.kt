@@ -7,9 +7,7 @@ import com.lzy.okgo.cookie.CookieJarImpl
 import com.lzy.okgo.cookie.store.DBCookieStore
 import com.lzy.okgo.model.HttpHeaders
 import com.lzy.okgo.model.HttpParams
-import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xinhua.language.wanbang.utils.AppOpenManager
-import com.xinhua.language.wanbang.utils.Constant
 import com.xinhua.language.wanbang.utils.appModule
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -30,8 +28,6 @@ class AutoClickApplication:Application() {
 //            loadInterstitialAd(this)
 //            appOpenManager?.fetchAd()
 //        }
-        val api = WXAPIFactory.createWXAPI(this, null)
-        api.registerApp(Constant.APP_ID)
         startKoin {
             androidContext(this@AutoClickApplication)
             modules(appModule)

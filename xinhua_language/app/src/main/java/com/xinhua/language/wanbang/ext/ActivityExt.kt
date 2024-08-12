@@ -11,7 +11,6 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.xinhua.language.wanbang.ui.NetErrorPop
 import java.io.Serializable
 
 
@@ -137,16 +136,5 @@ fun Activity.showKeyboard(et: EditText) {
 
 fun Activity.hideKeyboard(view: View) {
     inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
-}
-fun Context.netCheck():Boolean{
-    val connectivityManager =
-        getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val activeNetworkInfo = connectivityManager.activeNetworkInfo
-    return if(!(activeNetworkInfo != null && activeNetworkInfo.isConnected)){
-        NetErrorPop(this).showPopupWindow()
-        false
-    }else{
-        true
-    }
 }
 

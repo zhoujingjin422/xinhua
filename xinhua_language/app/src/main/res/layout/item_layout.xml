@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:id="@+id/sll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="19dp"
+        android:paddingEnd="14dp"
+        app:shape_radius="6dp"
+        android:layout_marginTop="5.5dp"
+        app:shape_solidColor="@color/white">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="影视大全——免费最新最火的电影影电视剧"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="5dp"
+            android:textSize="14dp"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:text="影视大全为您提供最新电视剧大全免费网站，最新电视剧、热门电影免费在线观看，提供高清版免费下载，影视大全是最好的在线影视免费网站。" />
+
+        <TextView
+            android:id="@+id/tv_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="www.hhh.com"
+            android:layout_marginTop="4dp"
+            android:textColor="#999999"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textSize="14sp" />
+    </com.hjq.shape.layout.ShapeLinearLayout>
+</layout>

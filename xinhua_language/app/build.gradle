@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('E:\\xinhua_language_one\\xinhua_language\\app\\xianhan.jks')
+            storeFile file('/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/xianhan.jks')
             storePassword 'com.cpdtlp.xianhanandroid'
             keyAlias 'xianhan'
             keyPassword 'com.cpdtlp.xianhanandroid'
@@ -70,19 +70,13 @@ dependencies {
     implementation 'com.lzy.net:okrx2:2.0.2'
     implementation 'com.lzy.net:okserver:2.0.5'
 //    implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
     implementation 'io.github.razerdp:BasePopup:3.2.1'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
     implementation 'com.google.code.gson:gson:2.10.1'
-    // 微信支付 SDK
-    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.28'
-    // 支付宝支付 SDK
-    api 'com.alipay.sdk:alipaysdk-android:15.8.17'
     implementation 'com.github.getActivity:ShapeView:9.0'
     implementation("org.greenrobot:eventbus:3.3.1")
-    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation 'org.apache.commons:commons-text:1.9'
 }

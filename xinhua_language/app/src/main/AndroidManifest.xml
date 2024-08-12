@@ -14,7 +14,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:name=".wanbang.AutoClickApplication"
@@ -30,53 +29,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wanbang.ui.GuideActivity"
+        <activity android:name=".wanbang.ui.SearchListActivity"
             android:screenOrientation="portrait"
             />
         <activity android:name=".wanbang.ui.MainActivity"
             android:screenOrientation="portrait"
             />
-        <activity
-            android:name="com.cpdtlp.xianhanandroid.WXPayEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:taskAffinity="com.oxford.tenapp"
-            android:launchMode="singleTask">
-        </activity>
-        <activity android:name=".wanbang.ui.LoginActivity"
-            android:screenOrientation="portrait"
-            />
+
+
         <activity android:name=".wanbang.ui.WebPlayPianoActivity"
             android:screenOrientation="portrait"
             />
         <activity android:name=".wanbang.ui.WebPlayActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".wanbang.ui.SubActivity"
-            android:screenOrientation="portrait"
-            />
-       <activity android:name=".wanbang.ui.PdfViewerActivity"
-            android:screenOrientation="portrait"
-            />
-       <activity android:name=".wanbang.ui.AccountSafeActivity"
-            android:screenOrientation="portrait"
-            />
-        <receiver android:name=".wanbang.ui.NetworkChangeReceiver"
-            tools:ignore="Instantiatable" />
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
     </application>
-    <queries>
-        <package android:name="com.tencent.mm" />
-    </queries>
     <!--适配华为（huawei）刘海屏-->
     <meta-data
         android:name="android.notch_support"
