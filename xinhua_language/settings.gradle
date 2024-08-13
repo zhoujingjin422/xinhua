@@ -19,7 +19,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "新华字典"
+rootProject.name = "浏览器"
 include ':app'
-
-include ':AdSet'

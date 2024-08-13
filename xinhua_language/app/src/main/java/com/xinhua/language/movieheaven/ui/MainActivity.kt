@@ -1,0 +1,81 @@
+package com.xinhua.language.movieheaven.ui
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.view.KeyEvent
+import android.widget.Toast
+import com.xinhua.language.movieheaven.ads.AdUtils
+import com.xinhua.language.R
+import com.xinhua.language.databinding.ActivityMainBinding
+import com.xinhua.language.movieheaven.BaseVMActivity
+import com.xinhua.language.movieheaven.ext.getSpValue
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class MainActivity : BaseVMActivity() {
+
+
+    private val binding by binding<ActivityMainBinding>(R.layout.activity_main)
+    private  val viewModel by viewModel<MainViewModel>()
+    @SuppressLint("SuspiciousIndentation")
+    override fun initView() {
+        binding.apply {
+            sfl.setOnClickListener {
+                //跳转到搜索也没
+                startActivity(
+                    Intent(this@MainActivity,SearchListActivity::class.java)
+                )
+            }
+            llBaidu.setOnClickListener {
+                if(getSpValue("showYs",false)){
+                    startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
+                        .putExtra("title","柠檬影院").putExtra("url","https://bywan.mmwcy.cn/"))
+                }else
+                    startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
+                        .putExtra("title","百度").putExtra("url","https://www.baidu.com/"))
+
+            }
+            llSina.setOnClickListener {
+                startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
+                    .putExtra("title","新浪").putExtra("url","https://www.sina.com.cn/"))
+            }
+            llSogou.setOnClickListener {
+                startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
+                    .putExtra("title","搜狗").putExtra("url","https://www.sogou.com/logo/monet/"))
+            }
+            llSohu.setOnClickListener {
+                startActivity(Intent(this@MainActivity,WebPlayActivity::class.java).putExtra("title","搜狐").putExtra("url","https://www.sohu.com/"))
+            }
+            AdUtils.getInstance().bannerAd(this@MainActivity,banner)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(getSpValue("showYs",false)){
+            binding.ivBaidu.setImageResource(R.mipmap.icon_yingshidaquan)
+            binding.tvBaidu.text="影视大全"
+        }else{
+            binding.ivBaidu.setImageResource(R.mipmap.icon_baidu)
+            binding.tvBaidu.text="百度"
+        }
+        AdUtils.getInstance().initRewardVideo(this)
+    }
+
+    override fun initData() {
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - startTime <= 5000) {
+                finish()
+            } else {
+                startTime = System.currentTimeMillis()
+                Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show()
+            }
+            false
+        } else {
+            super.onKeyDown(keyCode, event)
+        }
+    }
+    private var startTime = 0L
+}

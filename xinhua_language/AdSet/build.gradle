@@ -38,17 +38,18 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //======================arr方式引入 start================
     //基础包 start
-    implementation(name: 'ads-sdk-pro-6.2.1.9', ext: 'aar')
-    implementation(name: 'anythink_banner', ext: 'aar')
-    implementation(name: 'anythink_china_core', ext: 'aar')
-    implementation(name: 'anythink_core', ext: 'aar')
-    implementation(name: 'anythink_interstitial', ext: 'aar')
-    api(name: 'anythink_native', ext: 'aar')
-    implementation(name: 'anythink_network_gdt', ext: 'aar')
-    implementation(name: 'anythink_network_pangle_china', ext: 'aar')
-    implementation(name: 'anythink_rewardvideo', ext: 'aar')
-    implementation(name: 'anythink_splash', ext: 'aar')
-    implementation(name: 'GDTSDK.unionNormal.4.591.1461', ext: 'aar')
+
+//    implementation(name: 'ads-sdk-pro-6.2.1.9', ext: 'aar')
+//    implementation(name: 'anythink_banner', ext: 'aar')
+//    implementation(name: 'anythink_china_core', ext: 'aar')
+//    implementation(name: 'anythink_core', ext: 'aar')
+//    implementation(name: 'anythink_interstitial', ext: 'aar')
+//    api(name: 'anythink_native', ext: 'aar')
+//    implementation(name: 'anythink_network_gdt', ext: 'aar')
+//    implementation(name: 'anythink_network_pangle_china', ext: 'aar')
+//    implementation(name: 'anythink_rewardvideo', ext: 'aar')
+//    implementation(name: 'anythink_splash', ext: 'aar')
+//    implementation(name: 'GDTSDK.unionNormal.4.591.1461', ext: 'aar')
     // 章鱼 end
     //================ arr方式引入 end ====================
 
@@ -60,7 +61,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     implementation 'io.github.aliyun-sls:aliyun-log-android-sdk:2.7.0'
-    implementation 'com.hihonor.mcs:ads-identifier:1.0.2.301'
+//    implementation 'com.hihonor.mcs:ads-identifier:1.0.2.301'
     implementation 'com.google.android.material:material:1.0.0'
     //multidex 64K问题，如果已添加请忽略
     implementation 'androidx.multidex:multidex:2.0.1'

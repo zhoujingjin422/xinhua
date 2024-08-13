@@ -105,8 +105,8 @@
 -keepclassmembers,allowobfuscation class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
--keep class com.xinhua.language.wanbang.view.** { *; }
--keep class com.xinhua.language.wanbang.bean.** { *; }
+-keep class com.xinhua.language.movieheaven.view.** { *; }
+-keep class com.xinhua.language.movieheaven.bean.** { *; }
 -keepclassmembers class * implements androidx.viewbinding.ViewBinding {
   public static * inflate(android.view.LayoutInflater);
   public static * inflate(android.view.LayoutInflater, android.view.ViewGroup, boolean);
@@ -123,16 +123,6 @@
 -keep class com.tencent.mm.sdk.** {
     *;
 }
--keep class com.alipay.android.app.IAlixPay{*;}
--keep class com.alipay.android.app.IAlixPay$Stub{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
--keep class com.alipay.sdk.app.PayTask{ public *;}
--keep class com.alipay.sdk.app.AuthTask{ public *;}
--keep class com.alipay.sdk.app.H5PayCallback {
-    <fields>;
-    <methods>;
-}
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
       **[] $VALUES;
@@ -140,3 +130,23 @@
     }
 -dontwarn razerdp.basepopup.**
 -keep class razerdp.basepopup.**{*;}
+-dontwarn com.anythink.hb.**
+-keep class com.anythink.hb.**{ *;}
+
+-dontwarn com.anythink.china.api.**
+-keep class com.anythink.china.api.**{ *;}
+
+-keep class com.anythink.myoffer.ui.**{ *;}
+-keepclassmembers public class com.anythink.myoffer.ui.** {
+   public *;
+}
+
+
+
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** e(...);
+    public static *** w(...);
+}
