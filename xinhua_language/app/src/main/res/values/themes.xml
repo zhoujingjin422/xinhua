@@ -2,4 +2,17 @@
 <resources>
 
     <style name="Theme.xinhua" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="DefaultDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <!--是否允许对话框变暗-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--对话框变暗的程度，值越大越暗-->
+        <item name="android:backgroundDimAmount">0.3</item>
+        <!--设置window背景色-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否悬浮在activity上-->
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>

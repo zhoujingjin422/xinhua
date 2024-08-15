@@ -15,6 +15,7 @@ import com.xinhua.language.movieheaven.ads.AdUtils
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityWebBinding
 import com.xinhua.language.movieheaven.BaseVMActivity
+import com.xinhua.language.movieheaven.utils.AdsMindDialog
 
 
 /*** 选择服务界面 */
@@ -121,24 +122,26 @@ class WebPlayActivity : BaseVMActivity() {
     class JavaScriptObject(private val activity: Activity,private val binding:ActivityWebBinding) {
         @JavascriptInterface
         fun showReward() {
-            AdUtils.getInstance().rewardVideo(activity,object :
-                AdListener {
-                override fun onShow() {
+            AdsMindDialog(activity){
+                AdUtils.getInstance().rewardVideo(activity,object :
+                    AdListener {
+                    override fun onShow() {
 
-                }
+                    }
 
-                override fun onClose() {
-                }
+                    override fun onClose() {
+                    }
 
-                override fun reword(b: Boolean) {
-                    if (b){
-                        binding.web.evaluateJavascript("javascript:rewardSuccess()"
-                        ) {
-                            Log.e("javascript",it)
+                    override fun reword(b: Boolean) {
+                        if (b){
+                            binding.web.evaluateJavascript("javascript:rewardSuccess()"
+                            ) {
+                                Log.e("javascript",it)
+                            }
                         }
                     }
-                }
-            })
+                })
+            }.show()
         }
     }
 }

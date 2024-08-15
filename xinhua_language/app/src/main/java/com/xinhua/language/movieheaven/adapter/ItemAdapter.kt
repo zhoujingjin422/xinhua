@@ -13,7 +13,7 @@ class ItemAdapter(private val action:(item:WebData,index:Int)->Unit):BaseQuickAd
             tvDesc.text = item.desc
             tvUrl.text = item.url
             val position = getItemPosition(item)
-            if (position==0){
+            if (position==0&&item.title=="柠檬影院"){
                 tvTitle.setTextColor(context.resources.getColor(R.color.c_0045b9))
                 sll.setBackgroundResource(R.drawable.item_first_back)
             }else{
