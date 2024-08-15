@@ -47,6 +47,7 @@ class MainActivity : BaseVMActivity() {
             }
             AdUtils.getInstance().bannerAd(this@MainActivity,banner)
         }
+        AdUtils.getInstance().initRewardVideo(this)
     }
 
     override fun onResume() {
@@ -58,7 +59,6 @@ class MainActivity : BaseVMActivity() {
             binding.ivBaidu.setImageResource(R.mipmap.icon_baidu)
             binding.tvBaidu.text="百度"
         }
-        AdUtils.getInstance().initRewardVideo(this)
     }
 
     override fun initData() {

@@ -16,7 +16,7 @@ android {
     compileSdkVersion 32
     defaultConfig {
 //        com.cp.dtlp.xinhua.android
-        applicationId "com.nbgong.movieheaven"
+        applicationId "com.browser.weike"
         minSdk 24
         targetSdk 32
         versionCode 1

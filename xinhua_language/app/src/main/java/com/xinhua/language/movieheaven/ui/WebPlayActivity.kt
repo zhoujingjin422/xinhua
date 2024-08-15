@@ -94,6 +94,7 @@ class WebPlayActivity : BaseVMActivity() {
                     }
                 }
             }
+            WebView.setWebContentsDebuggingEnabled(true)
             intent.getStringExtra("url")?.let {url->
                 web.loadUrl(url)
             }

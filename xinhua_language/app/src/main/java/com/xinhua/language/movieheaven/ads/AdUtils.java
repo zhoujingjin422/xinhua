@@ -151,17 +151,16 @@ public class AdUtils {
     }
 
     public  void initRewardVideo(Activity activity){
-        if (mRewardVideoAd==null||!mRewardVideoAd.isAdReady()){
             mRewardVideoAd = new ATRewardVideoAd(activity.getApplicationContext(), AdConfig.激励视频);
             mRewardVideoAd.setAdListener(new ATRewardVideoListener() {
                 @Override
                 public void onRewardedVideoAdLoaded() {
-
+                    Log.e("reword","onRewardedVideoAdLoaded");
                 }
 
                 @Override
                 public void onRewardedVideoAdFailed(AdError adError) {
-
+                    Log.e("reword","onRewardedVideoAdFailed");
                 }
 
                 @Override
@@ -195,7 +194,6 @@ public class AdUtils {
                 }
             });
             mRewardVideoAd.load();
-        }
     }
     //激励视频
     public  void rewardVideo(Activity activity,AdListener listener){
