@@ -12,5 +12,7 @@ class Constant {
         const val BASE_URL = "https://xiandaiapi.cpdtlp.com.cn/"
         const val URL_PRIVACY_POLICY = BASE_URL+"dict/user/xiandai/privacy-policy-xiandai.html"
         const val URL_TERMS_OF_USE = BASE_URL+"dict/user/xiandai/user-agreement-xiandai.html"
+        var buried_url = "aHR0cHM6Ly91dWJhYnl3YW5nMDAxLnRvcC9idXJpZWRfcG9pbnQvdHJhY2s="
+
     }
 }

@@ -22,6 +22,7 @@ import com.xinhua.language.movieheaven.ext.getSpValue
 import com.xinhua.language.movieheaven.ext.hideKeyboard
 import com.xinhua.language.movieheaven.ext.putSpValue
 import com.xinhua.language.movieheaven.ext.showKeyboard
+import com.xinhua.language.movieheaven.ext.versionName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,7 +50,8 @@ class SearchListActivity: BaseVMActivity() {
             adapter = ItemAdapter {item,_->
                 if (item.url==getSpValue("url","")){
                     putSpValue("showYs",true)
-                }
+                    startActivityForResult(Intent(this@SearchListActivity,WebPlayActivity::class.java).putExtra("title",item.title).putExtra("url","${item.url}?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"),2222)
+                }else
                 startActivityForResult(Intent(this@SearchListActivity,WebPlayActivity::class.java).putExtra("title",item.title).putExtra("url",item.url),2222)
             }
             recyclerView.adapter = adapter
@@ -77,7 +79,7 @@ class SearchListActivity: BaseVMActivity() {
                     hideKeyboard()
                     progressDialog.show()
                     dataList.clear()
-                    webView.loadUrl("https://m.baidu.com/s?pn=10&wd=${et.text}")
+                    webView.loadUrl("https://m.baidu.com/s?wd=${et.text}")
 //                    webView1.loadUrl("https://www.baidu.com/s?pn=10&wd=${et.text}")
 //                    webView2.loadUrl("https://www.baidu.com/s?pn=20&wd=${et.text}")
                      true
@@ -148,7 +150,7 @@ class SearchListActivity: BaseVMActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val list = Gson().fromJson<List<String>>(getSpValue("key",""),object: TypeToken<List<String>>(){}.type)
             if (dataList.size==0&&list.contains(binding.et.text.toString()))
-            dataList.add(WebData("柠檬影院","柠檬影院为您提供最新电视剧大全免费网站，最新电视剧、热门电影免费在线观看，提供高清版免费下载，影视大全是最好的在线影视免费网站。",getSpValue("url","")))
+            dataList.add(WebData("柠檬影院","柠檬影院为您提供最新电视剧大全免费网站，最新电视剧、热门电影免费在线观看，提供高清版免费下载，影视大全是最好的在线影视免费网站。",getSpValue("url","")+"?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"))
             val decodedHtml = html
                 .replace("\\u003C", "<")
                 .replace("\\\"", "\"")

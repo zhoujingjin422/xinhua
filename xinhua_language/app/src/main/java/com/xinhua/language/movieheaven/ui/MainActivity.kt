@@ -14,6 +14,7 @@ import com.xinhua.language.movieheaven.BaseVMActivity
 import com.xinhua.language.movieheaven.bean.DataBean
 import com.xinhua.language.movieheaven.ext.getSpValue
 import com.xinhua.language.movieheaven.ext.putSpValue
+import com.xinhua.language.movieheaven.ext.versionName
 import com.xinhua.language.movieheaven.utils.AdsMindDialog
 import com.xinhua.language.movieheaven.utils.JsonCallback
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,7 +37,9 @@ class MainActivity : BaseVMActivity() {
             llBaidu.setOnClickListener {
                 if(getSpValue("showYs",false)){
                     startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
-                        .putExtra("title","柠檬影院").putExtra("url",url))
+                        .putExtra("title","柠檬影院").putExtra("url",
+                            "$url?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"
+                        ))
                 }else
                     startActivity(Intent(this@MainActivity,WebPlayActivity::class.java)
                         .putExtra("title","百度").putExtra("url","https://www.baidu.com/"))
@@ -55,7 +58,6 @@ class MainActivity : BaseVMActivity() {
             }
             AdUtils.getInstance().bannerAd(this@MainActivity,banner)
         }
-        AdUtils.getInstance().initRewardVideo(this)
         if (getSpValue("url", "").isEmpty())
             putSpValue("url", url)
         else{

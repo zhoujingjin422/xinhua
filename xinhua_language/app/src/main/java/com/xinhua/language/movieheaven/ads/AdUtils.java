@@ -29,7 +29,6 @@ import com.anythink.splashad.api.ATSplashExListener;
 public class AdUtils {
 
     private  ATSplashAd splashAd;
-    private  ATRewardVideoAd mRewardVideoAd;
     private  ATInterstitial mInterstitialAd;
     private  ATBannerView mBannerView;
     private static AdUtils adUtils;
@@ -45,11 +44,12 @@ public class AdUtils {
     }
     //初始化
     public  void init(Application app){
+        ATSDK.integrationChecking(app);
+        ATSDK.setNetworkLogDebug(true);
 //初始化SDK该接口不会采集用户信息
         ATSDK.init(app, AppID, TakuAppKey);
 //调用init后请再调用start，否则可能影响广告填充，造成收入下降
         ATSDK.start();
-        ATSDK.integrationChecking(app);
 
     }
     public void initSplashAdd(Activity mContext){
@@ -150,105 +150,7 @@ public class AdUtils {
         }
     }
 
-    public  void initRewardVideo(Activity activity){
-            mRewardVideoAd = new ATRewardVideoAd(activity.getApplicationContext(), AdConfig.激励视频);
-            mRewardVideoAd.setAdListener(new ATRewardVideoListener() {
-                @Override
-                public void onRewardedVideoAdLoaded() {
-                    Log.e("reword","onRewardedVideoAdLoaded");
-                }
 
-                @Override
-                public void onRewardedVideoAdFailed(AdError adError) {
-                    Log.e("reword","onRewardedVideoAdFailed");
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayStart(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayEnd(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayFailed(AdError adError, ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdClosed(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayClicked(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onReward(ATAdInfo atAdInfo) {
-
-                }
-            });
-            mRewardVideoAd.load();
-    }
-    //激励视频
-    public  void rewardVideo(Activity activity,AdListener listener){
-        if (mRewardVideoAd!=null&&mRewardVideoAd.isAdReady()) {
-            mRewardVideoAd.setAdListener(new ATRewardVideoListener(){
-                @Override
-                public void onRewardedVideoAdLoaded() {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdFailed(AdError adError) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayStart(ATAdInfo atAdInfo) {
-                    listener.onShow();
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayEnd(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayFailed(AdError adError, ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onRewardedVideoAdClosed(ATAdInfo atAdInfo) {
-                    listener.onClose();
-                    initRewardVideo(activity);
-                }
-
-                @Override
-                public void onRewardedVideoAdPlayClicked(ATAdInfo atAdInfo) {
-
-                }
-
-                @Override
-                public void onReward(ATAdInfo atAdInfo) {
-                    listener.reword(true);
-                    initRewardVideo(activity);
-                }
-            });
-            mRewardVideoAd.show(activity);
-        }else{
-            //重新加载
-            listener.reword(false);
-            listener.onClose();
-            initRewardVideo(activity);
-        }
-    }
 
     public  void  initInterstitialAd(Activity activity){
         mInterstitialAd = new ATInterstitial(activity, AdConfig.插屏);

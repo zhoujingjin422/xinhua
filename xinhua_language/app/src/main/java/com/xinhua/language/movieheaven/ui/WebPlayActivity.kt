@@ -10,11 +10,16 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
-import com.xinhua.language.movieheaven.ads.AdListener
-import com.xinhua.language.movieheaven.ads.AdUtils
+import com.anythink.core.api.ATAdConst
+import com.anythink.core.api.ATAdInfo
+import com.anythink.core.api.AdError
+import com.anythink.rewardvideo.api.ATRewardVideoAd
+import com.anythink.rewardvideo.api.ATRewardVideoListener
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityWebBinding
 import com.xinhua.language.movieheaven.BaseVMActivity
+import com.xinhua.language.movieheaven.ads.AdConfig
+import com.xinhua.language.movieheaven.ads.AdListener
 import com.xinhua.language.movieheaven.utils.AdsMindDialog
 
 
@@ -110,6 +115,7 @@ class WebPlayActivity : BaseVMActivity() {
         }
     }
     override fun initData() {
+        initRewardVideo(this)
     }
     override fun onBackPressed() {
         if (binding.web.canGoBack()){
@@ -119,29 +125,100 @@ class WebPlayActivity : BaseVMActivity() {
             super.onBackPressed()
         }
     }
-    class JavaScriptObject(private val activity: Activity,private val binding:ActivityWebBinding) {
+    class JavaScriptObject(private val activity: WebPlayActivity,private val binding:ActivityWebBinding) {
+        private var reword = false
         @JavascriptInterface
         fun showReward() {
             AdsMindDialog(activity){
-                AdUtils.getInstance().rewardVideo(activity,object :
+                activity.rewardVideo(activity,object :
                     AdListener {
                     override fun onShow() {
 
                     }
 
                     override fun onClose() {
+                        if (reword) {
+                            reword = false
+                            binding.web.evaluateJavascript(
+                                "javascript:rewardSuccess()"
+                            ) {
+                                Log.e("javascript", it)
+                            }
+                        }
+
                     }
 
                     override fun reword(b: Boolean) {
-                        if (b){
-                            binding.web.evaluateJavascript("javascript:rewardSuccess()"
-                            ) {
-                                Log.e("javascript",it)
-                            }
-                        }
+                        reword = b
                     }
                 })
             }.show()
         }
     }
+
+    private var mRewardVideoAd: ATRewardVideoAd? = null
+    private var loadSuccess = false
+    fun initRewardVideo(activity: Activity) {
+        mRewardVideoAd = ATRewardVideoAd(activity, AdConfig.激励视频)
+        mRewardVideoAd?.setAdListener(object : ATRewardVideoListener {
+            override fun onRewardedVideoAdLoaded() {
+                Log.e("reword", "onRewardedVideoAdLoaded")
+                loadSuccess = true
+            }
+
+            override fun onRewardedVideoAdFailed(adError: AdError) {
+                Log.e("reword", adError.fullErrorInfo)
+                loadSuccess = false
+            }
+
+            override fun onRewardedVideoAdPlayStart(atAdInfo: ATAdInfo) {
+            }
+            override fun onRewardedVideoAdPlayEnd(atAdInfo: ATAdInfo) {}
+            override fun onRewardedVideoAdPlayFailed(adError: AdError, atAdInfo: ATAdInfo) {}
+            override fun onRewardedVideoAdClosed(atAdInfo: ATAdInfo) {}
+            override fun onRewardedVideoAdPlayClicked(atAdInfo: ATAdInfo) {}
+            override fun onReward(atAdInfo: ATAdInfo) {}
+        })
+        mRewardVideoAd?.load()
+//        var userid = "test_userid_001";
+//        val userdata = "test_userdata_001"
+//        val localMap: MutableMap<String, Any> = HashMap()
+//        localMap[ATAdConst.KEY.USER_ID] = userid
+//        localMap[ATAdConst.KEY.USER_CUSTOM_DATA] = userdata
+//
+//        mRewardVideoAd!!.setLocalExtra(localMap)
+    }
+
+    //激励视频
+    fun rewardVideo(activity: Activity?, listener: AdListener) {
+        if (loadSuccess) {
+            mRewardVideoAd!!.setAdListener(object : ATRewardVideoListener {
+                override fun onRewardedVideoAdLoaded() {}
+                override fun onRewardedVideoAdFailed(adError: AdError) {}
+                override fun onRewardedVideoAdPlayStart(atAdInfo: ATAdInfo) {
+                    listener.onShow()
+                }
+
+                override fun onRewardedVideoAdPlayEnd(atAdInfo: ATAdInfo) {}
+                override fun onRewardedVideoAdPlayFailed(adError: AdError, atAdInfo: ATAdInfo) {}
+                override fun onRewardedVideoAdClosed(atAdInfo: ATAdInfo) {
+                    listener.onClose()
+                    initRewardVideo(activity!!)
+                }
+
+                override fun onRewardedVideoAdPlayClicked(atAdInfo: ATAdInfo) {}
+                override fun onReward(atAdInfo: ATAdInfo) {
+                    listener.reword(true)
+                    initRewardVideo(activity!!)
+                }
+            })
+            mRewardVideoAd!!.show(activity)
+        } else {
+            //重新加载
+            listener.reword(false)
+            listener.onClose()
+            initRewardVideo(activity!!)
+        }
+    }
+
 }
