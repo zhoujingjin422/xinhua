@@ -28,7 +28,7 @@ class AppLifecycleObserver(
 
                 override fun reword(b: Boolean) {
                 }
-            })
+            },true)
         }
         listener.onAppForegrounded()
     }

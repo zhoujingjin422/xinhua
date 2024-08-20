@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.apache.commons.text.StringEscapeUtils
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
 /**
@@ -48,7 +49,7 @@ class SearchListActivity: BaseVMActivity() {
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(this@SearchListActivity)
             adapter = ItemAdapter {item,_->
-                if (item.url==getSpValue("url","")){
+                if (item.url==getSpValue("url","")+"?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"){
                     putSpValue("showYs",true)
                     startActivityForResult(Intent(this@SearchListActivity,WebPlayActivity::class.java).putExtra("title",item.title).putExtra("url","${item.url}?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"),2222)
                 }else
@@ -62,7 +63,7 @@ class SearchListActivity: BaseVMActivity() {
                 hideKeyboard()
                 progressDialog.show()
                 dataList.clear()
-                webView.loadUrl("https://www.baidu.com/s?pn=10&wd=${et.text}")
+                webView.loadUrl("https://www.baidu.com/s?wd=${et.text}")
 //                webView1.loadUrl("https://www.baidu.com/s?pn=10&wd=${et.text}")
 //                webView2.loadUrl("https://www.baidu.com/s?pn=20&wd=${et.text}")
             }
@@ -155,35 +156,14 @@ class SearchListActivity: BaseVMActivity() {
                 .replace("\\u003C", "<")
                 .replace("\\\"", "\"")
             val connect = Jsoup.parse(decodedHtml)
-            val results: Elements = connect.getElementsByClass("c-result result")
-            val resultsContent: Elements = connect.getElementsByClass("c-result-content")
-            results.forEachIndexed { index, element ->
-                val linkElement = resultsContent[index]
-                val bikeElement = element.getElementsByClass("_no-spacing_eq0t5_4").first()
-                val link = linkElement.select("article").first().attr("rl-link-href")
-                val tittleElement =  element.getElementsByClass("_no-spacing_1bhnz_26 cu-line-clamp1").first()
-                val descElement =  element.getElementsByClass(" c-color summary-gap_3Jb4I").first()
-                if (tittleElement!=null&&link.isNotEmpty()){
-                    val title = tittleElement.text()
-                    if (descElement!=null){
-                        val desc = descElement.text()
-                        dataList.add(WebData(title,desc,link))
-                        println("element$index:Title: $title")
-                        println("element$index:Desc: $desc")
-                        println("element$index:link: $link")
-                        println("element----------------------------------")
-                    }
-                    if (bikeElement!=null){
-                        val desc = bikeElement.text()
-                        dataList.add(WebData(title,desc,link))
-                        println("element$index:Title: $title")
-                        println("element$index:Desc: $desc")
-                        println("element$index:link: $link")
-                        println("element----------------------------------")
-                    }
-                }
-
-            }
+            handleData(connect)
+            // 设置移动浏览器的 User-Agent
+            // 设置移动浏览器的 User-Agent
+            val userAgent =
+                "Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
+           val document = Jsoup.connect("https://m.baidu.com/s?pn=10&wd=${binding.et.text}")
+               .userAgent(userAgent).get()
+            handleData(document)
 //            if (int==3){
                 withContext(Dispatchers.Main){
                     progressDialog.dismiss()
@@ -192,6 +172,40 @@ class SearchListActivity: BaseVMActivity() {
 //            }
         }
     }
+
+    private fun handleData(connect: Document) {
+        val results: Elements = connect.getElementsByClass("c-result result")
+        val resultsContent: Elements = connect.getElementsByClass("c-result-content")
+        results.forEachIndexed { index, element ->
+            val linkElement = resultsContent[index]
+            val bikeElement = element.getElementsByClass("_no-spacing_eq0t5_4").first()
+            val link = linkElement.select("article").first().attr("rl-link-href")
+            val tittleElement =
+                element.getElementsByClass("_no-spacing_1bhnz_26 cu-line-clamp1").first()
+            val descElement = element.getElementsByClass(" c-color summary-gap_3Jb4I").first()
+            if (tittleElement != null && link.isNotEmpty()) {
+                val title = tittleElement.text()
+                if (descElement != null) {
+                    val desc = descElement.text()
+                    dataList.add(WebData(title, desc, link))
+                    println("element$index:Title: $title")
+                    println("element$index:Desc: $desc")
+                    println("element$index:link: $link")
+                    println("element----------------------------------")
+                }
+                if (bikeElement != null) {
+                    val desc = bikeElement.text()
+                    dataList.add(WebData(title, desc, link))
+                    println("element$index:Title: $title")
+                    println("element$index:Desc: $desc")
+                    println("element$index:link: $link")
+                    println("element----------------------------------")
+                }
+            }
+
+        }
+    }
+
     class WebAppInterface(private val context: Context) {
 
         @JavascriptInterface

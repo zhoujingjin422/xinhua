@@ -1,7 +1,13 @@
 package com.xinhua.language.movieheaven.ui
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -21,19 +27,37 @@ import com.xinhua.language.movieheaven.BaseVMActivity
 import com.xinhua.language.movieheaven.ads.AdConfig
 import com.xinhua.language.movieheaven.ads.AdListener
 import com.xinhua.language.movieheaven.utils.AdsMindDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.security.auth.callback.Callback
 
 
 /*** 选择服务界面 */
 class WebPlayActivity : BaseVMActivity() {
     private val binding by binding<ActivityWebBinding>(R.layout.activity_web)
     private var isFullscreen = false
+    val handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            // 处理接收到的消息
+            when (msg.what) {
+                1 ->{
+                    progressDialog?.dismiss()
+                }
+                2 ->{
+                    progressDialog?.show()
+                }
+                else -> super.handleMessage(msg)
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
             // 如果有保存状态，从中恢复 WebView 的状态
             binding.web.restoreState(savedInstanceState)
         } else {
             intent.getStringExtra("url")?.let {url->
-                binding.web.loadUrl("url")
+                binding.web.loadUrl(url)
             }
         }
         super.onCreate(savedInstanceState)
@@ -116,8 +140,15 @@ class WebPlayActivity : BaseVMActivity() {
     }
     override fun initData() {
         initRewardVideo(this)
+        progressDialog = ProgressDialog(this)
     }
     override fun onBackPressed() {
+        if (progressDialog?.isShowing==true){
+            val message = Message.obtain()
+            message.what = 2
+            handler.sendMessage(message)
+            return
+        }
         if (binding.web.canGoBack()){
             binding.web.goBack()
             return
@@ -158,26 +189,55 @@ class WebPlayActivity : BaseVMActivity() {
 
     private var mRewardVideoAd: ATRewardVideoAd? = null
     private var loadSuccess = false
-    fun initRewardVideo(activity: Activity) {
+    private var progressDialog:ProgressDialog? = null
+   private fun initRewardVideo(activity: Activity,show:Boolean = false) {
         mRewardVideoAd = ATRewardVideoAd(activity, AdConfig.激励视频)
         mRewardVideoAd?.setAdListener(object : ATRewardVideoListener {
             override fun onRewardedVideoAdLoaded() {
                 Log.e("reword", "onRewardedVideoAdLoaded")
                 loadSuccess = true
+                if (show){
+                    val message = Message.obtain()
+                    message.what = 1
+                    handler.sendMessage(message)
+                    mRewardVideoAd!!.show(activity)
+                }
             }
 
             override fun onRewardedVideoAdFailed(adError: AdError) {
                 Log.e("reword", adError.fullErrorInfo)
+                if (show){
+                    val message = Message.obtain()
+                    message.what = 1
+                    handler.sendMessage(message)
+                    AlertDialog.Builder(activity).apply {
+                        setMessage(adError.fullErrorInfo)
+                        setPositiveButton("确认"
+                        ) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    }.create().show()
+                }
                 loadSuccess = false
             }
 
             override fun onRewardedVideoAdPlayStart(atAdInfo: ATAdInfo) {
+                listener?.onShow()
             }
             override fun onRewardedVideoAdPlayEnd(atAdInfo: ATAdInfo) {}
             override fun onRewardedVideoAdPlayFailed(adError: AdError, atAdInfo: ATAdInfo) {}
-            override fun onRewardedVideoAdClosed(atAdInfo: ATAdInfo) {}
+            override fun onRewardedVideoAdClosed(atAdInfo: ATAdInfo) {
+                val message = Message.obtain()
+                message.what = 1
+                handler.sendMessage(message)
+                listener?.onClose()
+                initRewardVideo(activity)
+            }
             override fun onRewardedVideoAdPlayClicked(atAdInfo: ATAdInfo) {}
-            override fun onReward(atAdInfo: ATAdInfo) {}
+            override fun onReward(atAdInfo: ATAdInfo) {
+                listener?.reword(true)
+//                initRewardVideo(activity)
+            }
         })
         mRewardVideoAd?.load()
 //        var userid = "test_userid_001";
@@ -189,35 +249,17 @@ class WebPlayActivity : BaseVMActivity() {
 //        mRewardVideoAd!!.setLocalExtra(localMap)
     }
 
+    private var listener: AdListener?=null
     //激励视频
     fun rewardVideo(activity: Activity?, listener: AdListener) {
+        this.listener = listener
+        val message = Message.obtain()
+        message.what = 2
+        handler.sendMessage(message)
         if (loadSuccess) {
-            mRewardVideoAd!!.setAdListener(object : ATRewardVideoListener {
-                override fun onRewardedVideoAdLoaded() {}
-                override fun onRewardedVideoAdFailed(adError: AdError) {}
-                override fun onRewardedVideoAdPlayStart(atAdInfo: ATAdInfo) {
-                    listener.onShow()
-                }
-
-                override fun onRewardedVideoAdPlayEnd(atAdInfo: ATAdInfo) {}
-                override fun onRewardedVideoAdPlayFailed(adError: AdError, atAdInfo: ATAdInfo) {}
-                override fun onRewardedVideoAdClosed(atAdInfo: ATAdInfo) {
-                    listener.onClose()
-                    initRewardVideo(activity!!)
-                }
-
-                override fun onRewardedVideoAdPlayClicked(atAdInfo: ATAdInfo) {}
-                override fun onReward(atAdInfo: ATAdInfo) {
-                    listener.reword(true)
-                    initRewardVideo(activity!!)
-                }
-            })
             mRewardVideoAd!!.show(activity)
         } else {
-            //重新加载
-            listener.reword(false)
-            listener.onClose()
-            initRewardVideo(activity!!)
+            initRewardVideo(activity!!,true)
         }
     }
 

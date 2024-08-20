@@ -5,8 +5,10 @@ import static com.xinhua.language.movieheaven.ads.AdConfig.AppID;
 import static com.xinhua.language.movieheaven.ads.AdConfig.TakuAppKey;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -152,65 +154,35 @@ public class AdUtils {
 
 
 
-    public  void  initInterstitialAd(Activity activity){
-        mInterstitialAd = new ATInterstitial(activity, AdConfig.插屏);
-        mInterstitialAd.setAdListener(new ATInterstitialListener() {
-            @Override
-            public void onInterstitialAdLoaded() {
-
-            }
-
-            @Override
-            public void onInterstitialAdLoadFail(AdError adError) {
-
-            }
-
-            @Override
-            public void onInterstitialAdClicked(ATAdInfo atAdInfo) {
-
-            }
-
-            @Override
-            public void onInterstitialAdShow(ATAdInfo atAdInfo) {
-
-            }
-
-            @Override
-            public void onInterstitialAdClose(ATAdInfo atAdInfo) {
-
-            }
-
-            @Override
-            public void onInterstitialAdVideoStart(ATAdInfo atAdInfo) {
-
-            }
-
-            @Override
-            public void onInterstitialAdVideoEnd(ATAdInfo atAdInfo) {
-
-            }
-
-            @Override
-            public void onInterstitialAdVideoError(AdError adError) {
-
-            }
-        });
-        mInterstitialAd.load();
-    }
     //插屏
-    public  void interstitialAd(Activity activity,AdListener adListener) {
-
-        if (mInterstitialAd!=null&&mInterstitialAd.isAdReady()) {
-            mInterstitialAd.setAdListener( new ATInterstitialListener() {
+    public  void interstitialAd(Activity activity,AdListener adListener,boolean show) {
+        if (mInterstitialAd!=null&&mInterstitialAd.isAdReady()&&show) {
+            mInterstitialAd.show(activity);
+        }else{
+            //重新加载
+            mInterstitialAd = new ATInterstitial(activity, AdConfig.插屏);
+            mInterstitialAd.setAdListener(new ATInterstitialListener() {
                 @Override
                 public void onInterstitialAdLoaded() {
-
+                    if (show){
+                        mInterstitialAd.show(activity);
+                    }
                 }
 
                 @Override
                 public void onInterstitialAdLoadFail(AdError adError) {
+                    if (show){
+                       new AlertDialog.Builder(activity).
+                            setMessage(adError.getFullErrorInfo()).
+                            setPositiveButton("确认"
+                                    , new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).create().show();
+                    }
                     adListener.onClose();
-                    initInterstitialAd(activity);
                 }
 
                 @Override
@@ -226,7 +198,7 @@ public class AdUtils {
                 @Override
                 public void onInterstitialAdClose(ATAdInfo atAdInfo) {
                     adListener.onClose();
-                    initInterstitialAd(activity);
+                    interstitialAd(activity,adListener,false);
                 }
 
                 @Override
@@ -244,11 +216,7 @@ public class AdUtils {
                     adListener.onClose();
                 }
             });
-            mInterstitialAd.show(activity);
-        }else{
-            //重新加载
-            initInterstitialAd(activity);
-            adListener.onClose();
+            mInterstitialAd.load();
         }
     }
     //Banner

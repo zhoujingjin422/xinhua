@@ -36,7 +36,6 @@ class SplashActivity:AppCompatActivity() {
         }
         findViewById<ConstraintLayout>(R.id.parent)
         AdUtils.getInstance().initSplashAdd(this)
-        AdUtils.getInstance().initInterstitialAd(this)
         findViewById<ConstraintLayout>(R.id.parent).postDelayed({
             AdUtils.getInstance().splashAd(this,findViewById<ConstraintLayout>(R.id.parent),object :
                 AdListener {

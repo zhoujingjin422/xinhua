@@ -10,7 +10,9 @@ import com.lzy.okgo.model.Response
 import com.xinhua.language.movieheaven.ads.AdUtils
 import com.xinhua.language.R
 import com.xinhua.language.databinding.ActivityMainBinding
+import com.xinhua.language.movieheaven.AutoClickApplication
 import com.xinhua.language.movieheaven.BaseVMActivity
+import com.xinhua.language.movieheaven.ads.AdListener
 import com.xinhua.language.movieheaven.bean.DataBean
 import com.xinhua.language.movieheaven.ext.getSpValue
 import com.xinhua.language.movieheaven.ext.putSpValue
@@ -63,6 +65,18 @@ class MainActivity : BaseVMActivity() {
         else{
             url  = getSpValue("url", "")
         }
+        AdUtils.getInstance().interstitialAd(this,object :
+            AdListener {
+            override fun onShow() {
+
+            }
+
+            override fun onClose() {
+            }
+
+            override fun reword(b: Boolean) {
+            }
+        },true)
     }
 
     override fun onResume() {
