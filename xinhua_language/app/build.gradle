@@ -7,10 +7,10 @@ plugins {
 android {
 //    signingConfigs {
 //        debug {
-//            storeFile file('/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/xianhan.jks')
-//            storePassword 'com.cpdtlp.xianhanandroid'
-//            keyAlias 'xianhan'
-//            keyPassword 'com.cpdtlp.xianhanandroid'
+//            storeFile file('/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/weike.jks')
+//            storePassword 'com.browser.weike'
+//            keyAlias 'weike'
+//            keyPassword 'com.browser.weike'
 //        }
 //    }
     compileSdkVersion 32
