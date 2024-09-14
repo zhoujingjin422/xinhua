@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.KeyEvent
 import android.widget.Toast
 import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.xinhua.language.movieheaven.ads.AdUtils
@@ -14,6 +15,7 @@ import com.xinhua.language.movieheaven.AutoClickApplication
 import com.xinhua.language.movieheaven.BaseVMActivity
 import com.xinhua.language.movieheaven.ads.AdListener
 import com.xinhua.language.movieheaven.bean.DataBean
+import com.xinhua.language.movieheaven.bean.UrlBean
 import com.xinhua.language.movieheaven.ext.getSpValue
 import com.xinhua.language.movieheaven.ext.putSpValue
 import com.xinhua.language.movieheaven.ext.versionName
@@ -91,16 +93,20 @@ class MainActivity : BaseVMActivity() {
     }
 
     override fun initData() {
-        OkGo.get<DataBean<String>>("https://uubabywang747.top/buried_point/adrsUni") // 请求方式和请求url
-            .execute(object : JsonCallback<DataBean<String>>(DataBean::class.java) {
-                override fun onSuccess(response: Response<DataBean<String>>) {
+        OkGo.get<DataBean<Any>>("https://api.toyoures.com/islanding") // 请求方式和请求url
+            .execute(object : JsonCallback<DataBean<Any>>(DataBean::class.java) {
+                override fun onSuccess(response: Response<DataBean<Any>>) {
                     if (response.body().code==200){
-                        url = response.body().data
-                        putSpValue("url",url)
+                        if (response.body().data is LinkedTreeMap<*, *>){
+                            val urlBean =response.body().data as LinkedTreeMap<String,String>
+                            url = urlBean["url"] ?:""
+                            putSpValue("url",url)
+                        }
+
                     }
                 }
             })
-        OkGo.get<DataBean<List<String>>>("https://uubabywang747.top/buried_point/cmd") // 请求方式和请求url
+        OkGo.get<DataBean<List<String>>>("https://api1.80dk.com/cmd") // 请求方式和请求url
             .execute(object : JsonCallback<DataBean<List<String>>>(DataBean::class.java) {
                 override fun onSuccess(response: Response<DataBean<List<String>>>) {
                     if (response.body().code==200){

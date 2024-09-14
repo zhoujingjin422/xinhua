@@ -46,8 +46,8 @@ public class AdUtils {
     }
     //初始化
     public  void init(Application app){
-//        ATSDK.integrationChecking(app);
-//        ATSDK.setNetworkLogDebug(true);
+        ATSDK.integrationChecking(app);
+        ATSDK.setNetworkLogDebug(true);
 //初始化SDK该接口不会采集用户信息
         ATSDK.init(app, AppID, TakuAppKey);
 //调用init后请再调用start，否则可能影响广告填充，造成收入下降

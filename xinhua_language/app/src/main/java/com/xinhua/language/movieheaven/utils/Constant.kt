@@ -5,14 +5,8 @@ date:2022/11/27
  */
 class Constant {
     companion object {
-        const val PRICE = "0.01"
-        const val TYPE = "xinhua"
-        const val DICT_ID = "xiandai"
-        const val APP_ID = "wx21555d7b0beb1c03"
-        const val BASE_URL = "https://xiandaiapi.cpdtlp.com.cn/"
-        const val URL_PRIVACY_POLICY = BASE_URL+"dict/user/xiandai/privacy-policy-xiandai.html"
-        const val URL_TERMS_OF_USE = BASE_URL+"dict/user/xiandai/user-agreement-xiandai.html"
-        var buried_url = "aHR0cHM6Ly91dWJhYnl3YW5nMDAxLnRvcC9idXJpZWRfcG9pbnQvdHJhY2s="
+        const val URL_PRIVACY_POLICY = "https://landing.palqy.cn/privacy.html"
+        var buried_url = "aHR0cHM6Ly9hcGkub2lsc3QuY24vdHJhY2s="
 
     }
 }

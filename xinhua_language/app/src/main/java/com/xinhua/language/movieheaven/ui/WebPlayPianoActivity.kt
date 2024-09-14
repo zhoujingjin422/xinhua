@@ -3,51 +3,54 @@ package com.xinhua.language.movieheaven.ui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.webkit.JavascriptInterface
+import android.webkit.WebViewClient
+import com.xinhua.language.R
+import com.xinhua.language.databinding.ActivityWebPlayBinding
 import com.xinhua.language.movieheaven.BaseVMActivity
 
 
 /*** 选择服务界面 */
 class WebPlayPianoActivity : BaseVMActivity() {
-    private var progressDialog:ProgressDialog?=null
+    private val binding by binding<ActivityWebPlayBinding>(R.layout.activity_web_play)
     companion object {
-        fun startActivity(activity: Activity) {
+        fun startActivity(activity: Context, title: String, url: String) {
             activity.startActivity(
                 Intent(activity, WebPlayPianoActivity::class.java)
+                    .putExtra("Title", title).putExtra("Url", url)
             )
         }
     }
-private var startUrl:String? = null
 
-    @SuppressLint("JavascriptInterface", "SetJavaScriptEnabled")
     override fun initView() {
-
-    }
-
-    /**
-     * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
-     */
-    override fun initData() {
-
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-    }
-
-    class JavaScriptObject(private val activity: Activity) {
-        @JavascriptInterface
-        fun goback() {
-            activity.finish()
+        binding.apply {
+            toolBar.title = intent.getStringExtra("Title")
+            setSupportActionBar(toolBar)
+            toolBar.setNavigationOnClickListener {
+                onBackPressed()
+            }
+            webView.settings.apply {
+                javaScriptEnabled = true
+            }
+            webView.webViewClient = WebViewClient()
         }
     }
 
-    override fun onBackPressed() {
+    override fun initData() {
+        val url = intent.getStringExtra("Url")
+        url?.let {
+            binding.webView.loadUrl(it)
+        }
+    }
 
-        super.onBackPressed()
-
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.webView.apply {
+            stopLoading()
+            clearView()
+            destroy()
+        }
     }
 }

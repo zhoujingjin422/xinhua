@@ -12,7 +12,9 @@ import com.lzy.okgo.model.Response
 import com.xinhua.language.movieheaven.ads.AdListener
 import com.xinhua.language.movieheaven.ads.AdUtils
 import com.xinhua.language.R
+import com.xinhua.language.movieheaven.AutoClickApplication
 import com.xinhua.language.movieheaven.bean.DataBean
+import com.xinhua.language.movieheaven.ext.getSpValue
 import com.xinhua.language.movieheaven.ext.putSpValue
 import com.xinhua.language.movieheaven.ext.versionName
 import com.xinhua.language.movieheaven.utils.Constant.Companion.buried_url
@@ -35,28 +37,51 @@ class SplashActivity:AppCompatActivity() {
             return
         }
         findViewById<ConstraintLayout>(R.id.parent)
-        AdUtils.getInstance().initSplashAdd(this)
-        findViewById<ConstraintLayout>(R.id.parent).postDelayed({
-            AdUtils.getInstance().splashAd(this,findViewById<ConstraintLayout>(R.id.parent),object :
-                AdListener {
-                override fun onShow() {
+        if (!getSpValue("hasShowPrivacy", false)) {
+            ServeAndPrivatePop(this) {
+                val app = application as AutoClickApplication
+                app.initAfterPermissionAgree()
+                open()
+                AdUtils.getInstance().initSplashAdd(this)
+                AdUtils.getInstance().splashAd(this,findViewById<ConstraintLayout>(R.id.parent),object :
+                    AdListener {
+                    override fun onShow() {
 
-                }
+                    }
 
-                override fun onClose() {
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                    finish()
-                }
+                    override fun onClose() {
+                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                        finish()
+                    }
 
-                override fun reword(b: Boolean) {
-                }
+                    override fun reword(b: Boolean) {
+                    }
 
-            })
-        },1000L)
-        open()
-//        }
-        //延迟两秒，判断是不是首次进入，首次进入到导航页，不是直接进首页
+                })
+            }.showPopupWindow()
+        }else{
+            val app = application as AutoClickApplication
+            app.initAfterPermissionAgree()
+            AdUtils.getInstance().initSplashAdd(this)
+            findViewById<ConstraintLayout>(R.id.parent).postDelayed({
+                AdUtils.getInstance().splashAd(this,findViewById<ConstraintLayout>(R.id.parent),object :
+                    AdListener {
+                    override fun onShow() {
 
+                    }
+
+                    override fun onClose() {
+                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                        finish()
+                    }
+
+                    override fun reword(b: Boolean) {
+                    }
+
+                })
+            },1000L)
+            open()
+        }
     }
 
 

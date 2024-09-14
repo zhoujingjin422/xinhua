@@ -3,7 +3,9 @@ package com.xinhua.language.movieheaven.ui
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -37,6 +39,14 @@ import javax.security.auth.callback.Callback
 class WebPlayActivity : BaseVMActivity() {
     private val binding by binding<ActivityWebBinding>(R.layout.activity_web)
     private var isFullscreen = false
+    companion object {
+        fun startActivity(activity: Context, title: String, url: String) {
+            activity.startActivity(
+                Intent(activity, WebPlayActivity::class.java)
+                    .putExtra("Title", title).putExtra("Url", url)
+            )
+        }
+    }
     val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             // 处理接收到的消息

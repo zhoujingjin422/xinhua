@@ -149,9 +149,12 @@ class SearchListActivity: BaseVMActivity() {
     private fun parseHtml(html: String) {
         int++
         CoroutineScope(Dispatchers.IO).launch {
-            val list = Gson().fromJson<List<String>>(getSpValue("key",""),object: TypeToken<List<String>>(){}.type)
-            if (dataList.size==0&&list.contains(binding.et.text.toString()))
-            dataList.add(WebData("柠檬影院","柠檬影院为您提供最新电视剧大全免费网站，最新电视剧、热门电影免费在线观看，提供高清版免费下载，影视大全是最好的在线影视免费网站。",getSpValue("url","")+"?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"))
+            try {
+                val list = Gson().fromJson<List<String>>(getSpValue("key",""),object: TypeToken<List<String>>(){}.type)
+                if (dataList.size==0&&list.contains(binding.et.text.toString()))
+                dataList.add(WebData("柠檬影院","柠檬影院为您提供最新电视剧大全免费网站，最新电视剧、热门电影免费在线观看，提供高清版免费下载，影视大全是最好的在线影视免费网站。",getSpValue("url","")+"?app=weike_android&uuid=${getAndroidID()}&version=${versionName}"))
+            } catch (e: Exception) {
+            }
             val decodedHtml = html
                 .replace("\\u003C", "<")
                 .replace("\\\"", "\"")

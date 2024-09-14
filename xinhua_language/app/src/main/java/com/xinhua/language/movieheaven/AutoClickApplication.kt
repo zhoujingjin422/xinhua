@@ -27,11 +27,11 @@ class AutoClickApplication:Application() {
     }
     override fun onCreate() {
         super.onCreate()
+
+    }
+    fun initAfterPermissionAgree() {
         initOkGo()
-//        MobileAds.initialize(this) {
-//            loadInterstitialAd(this)
-//            appOpenManager?.fetchAd()
-//        }
+        appOpenManager = AppOpenManager(this)
         AdUtils.getInstance().init(this)
         startKoin {
             androidContext(this@AutoClickApplication)
@@ -51,9 +51,6 @@ class AutoClickApplication:Application() {
     }
     /*** 初始化OkGo */
     fun initOkGo() {
-
-        //okGo网络框架初始化和全局配置
-
         //okGo网络框架初始化和全局配置
         val builder = OkHttpClient.Builder()
 

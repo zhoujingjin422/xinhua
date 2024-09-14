@@ -5,21 +5,21 @@ plugins {
 }
 
 android {
-//    signingConfigs {
-//        debug {
-//            storeFile file('/Users/wangweige/StudioProjects/xinhua/xinhua_language/app/weike.jks')
-//            storePassword 'com.browser.weike'
-//            keyAlias 'weike'
-//            keyPassword 'com.browser.weike'
-//        }
-//    }
+    signingConfigs {
+        debug {
+            storeFile file('weike1.jks')
+            storePassword 'com.browser.weike'
+            keyAlias 'weike1'
+            keyPassword 'com.browser.weike'
+        }
+    }
     compileSdkVersion 32
     defaultConfig {
 //        com.cp.dtlp.xinhua.android
         applicationId "com.browser.weaike"
         minSdk 24
         targetSdk 32
-        versionCode 4
+        versionCode 13
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
